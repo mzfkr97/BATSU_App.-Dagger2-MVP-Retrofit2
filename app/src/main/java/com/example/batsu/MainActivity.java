@@ -155,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+
+    //устанавливаем текущий фрагмент
     void setLoaderFragment(Fragment active, Fragment currentFragment, int currentPosition){
         loaderFragment.hideOldAndShowNewFragWithBackStackAnimation(
                 getSupportFragmentManager(),active, currentFragment,
