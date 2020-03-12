@@ -1,0 +1,47 @@
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts?authuser=1#static
+     https://habr.com/ru/post/335480/
+     -->
+    <shortcut
+        android:shortcutId="shortBus"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/shortcut_home"
+        android:shortcutLongLabel="@string/shortcut_long_home"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="com.example.batsu.ACTION_HOME"
+            android:targetPackage="com.example.batsu"
+            android:targetClass="com.example.batsu.MainActivity" />
+        <!-- Если ваш ярлык связан с несколькими намерениями, включите их
+              Вот. Последнее намерение в списке определяет, что видит пользователь, когда
+              они запускают этот ярлык. -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+    <shortcut
+        android:shortcutId="shortHealth"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/shortcut_dashboard"
+        android:shortcutLongLabel="@string/shortcut_long_dashboard"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="com.example.batsu.ACTION_DASHBOARD"
+            android:targetPackage="com.example.batsu"
+            android:targetClass="com.example.batsu.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!--        android:icon="@drawable/in_action_cinema"-->
+    <shortcut
+        android:shortcutId="shortCinema"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/shortcut_notification"
+        android:shortcutLongLabel="@string/shortcut_long_notification"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="com.example.batsu.ACTION_NOTIFICATION"
+            android:targetPackage="com.example.batsu"
+            android:targetClass="com.example.batsu.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
