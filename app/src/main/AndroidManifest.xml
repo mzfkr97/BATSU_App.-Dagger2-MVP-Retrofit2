@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.batsu">
+    package="com.roman.batsu">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,7 +20,7 @@
         tools:node="remove" />
 
     <application
-        android:name=".utils.application.MyApplication"
+        android:name="com.roman.batsu.utils.application.MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/icon_app"
         android:label="@string/app_name"
@@ -34,7 +34,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.roman.batsu.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">

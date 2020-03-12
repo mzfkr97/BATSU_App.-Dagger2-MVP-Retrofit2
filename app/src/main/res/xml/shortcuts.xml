@@ -10,9 +10,9 @@
         android:shortcutLongLabel="@string/shortcut_long_home"
         tools:targetApi="n_mr1">
         <intent
-            android:action="com.example.batsu.ACTION_HOME"
-            android:targetPackage="com.example.batsu"
-            android:targetClass="com.example.batsu.MainActivity" />
+            android:action="com.roman.batsu.ACTION_HOME"
+            android:targetPackage="com.roman.batsu"
+            android:targetClass="com.roman.batsu.MainActivity" />
         <!-- Если ваш ярлык связан с несколькими намерениями, включите их
               Вот. Последнее намерение в списке определяет, что видит пользователь, когда
               они запускают этот ярлык. -->
@@ -26,9 +26,9 @@
         android:shortcutLongLabel="@string/shortcut_long_dashboard"
         tools:targetApi="n_mr1">
         <intent
-            android:action="com.example.batsu.ACTION_DASHBOARD"
-            android:targetPackage="com.example.batsu"
-            android:targetClass="com.example.batsu.MainActivity" />
+            android:action="com.roman.batsu.ACTION_DASHBOARD"
+            android:targetPackage="com.roman.batsu"
+            android:targetClass="com.roman.batsu.MainActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
     <!--        android:icon="@drawable/in_action_cinema"-->
@@ -39,9 +39,9 @@
         android:shortcutLongLabel="@string/shortcut_long_notification"
         tools:targetApi="n_mr1">
         <intent
-            android:action="com.example.batsu.ACTION_NOTIFICATION"
-            android:targetPackage="com.example.batsu"
-            android:targetClass="com.example.batsu.MainActivity" />
+            android:action="com.roman.batsu.ACTION_NOTIFICATION"
+            android:targetPackage="com.roman.batsu"
+            android:targetClass="com.roman.batsu.MainActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>
