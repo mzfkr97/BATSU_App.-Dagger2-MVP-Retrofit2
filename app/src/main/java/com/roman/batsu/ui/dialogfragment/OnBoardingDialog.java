@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.roman.batsu.R;
+import com.roman.batsu.utils.TextUtils;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -53,18 +54,13 @@ public class OnBoardingDialog extends DialogFragment implements View.OnClickList
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.onboarding_dialog, null);
-
-        settings = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-
         builder.setView(v);
+        settings = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         text_title = v.findViewById(R.id.text_title);
         text_description = v.findViewById(R.id.text_description);
         letsGoButton = v.findViewById(R.id.letsGoButton);
-
         text_title.setText(getString(R.string.on_boarding_dialog_title));
-        text_description.setText(getString(R.string.on_boarding_dialog_description));
-
+        TextUtils.setTextWithLinks(text_description, TextUtils.fromHtml(getString(R.string.on_boarding_dialog_description)));
         letsGoButton.setOnClickListener(this);
         return builder.create();
     }
