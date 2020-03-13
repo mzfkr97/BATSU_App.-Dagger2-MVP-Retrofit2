@@ -35,18 +35,13 @@ import retrofit2.Response;
 public class DashboardFragment extends Fragment implements DashboardAdapter.DashboardItemClick {
 
     private RecyclerView recyclerView;
-    private DashboardAdapter adapter;
     private RXConnector rxConnector;
     private List<ResponseDashboard> dashboardList = new ArrayList<>();
-
     private long mLastClickTime = 0;
-
     private CardView cardNotification;
     private Button button_error;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
-
-
 
     public static DashboardFragment newInstance() {
         return new DashboardFragment();
@@ -132,9 +127,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
                     onError();
                     Log.d("TAG", "onFailure: " + response.message());
                 }
-
             }
-
             @Override
             public void onFailure(Call<List<ResponseDashboard>> call, Throwable t) {
                 Log.d("TAG", "onFailure: " + t.getMessage());
@@ -150,7 +143,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
     }
 
     private void createListData(List<ResponseDashboard> listData) {
-        adapter = new DashboardAdapter(listData);
+        DashboardAdapter adapter = new DashboardAdapter(listData);
         recyclerView.setAdapter(adapter);
         cardNotification.setVisibility(View.GONE);
         swipeContainer.setRefreshing(false);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#477BB8</color>
-    <color name="colorPrimaryDark">#407ABD</color>
+    <color name="colorPrimary">#39A557</color>
+    <color name="colorPrimaryDark">#379551</color>
     <color name="colorAccent">#FAE102</color>
 
     <color name="colorError">#FFFF0000</color>
@@ -17,11 +17,11 @@
     <!--цвет текста primary и secondary в меню-->
     <color name="textColorPrimary">#333333</color>
     <color name="textColorSecondary">#8A8989</color>
-    <color name="textColorLink">#5781bf</color>
+    <color name="textColorLink">#1B7734</color>
 
 
 
-    <color name="tab_background_selected">#5281b9</color>
+    <color name="tab_background_selected">#0F772C</color>
     <color name="tab_background_unselected">#8B8A8A</color>
 
 

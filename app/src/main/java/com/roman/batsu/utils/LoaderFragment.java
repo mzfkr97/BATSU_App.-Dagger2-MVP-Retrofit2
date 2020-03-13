@@ -42,8 +42,6 @@ public class LoaderFragment {
 
     /**
      * Show fragment with fragment manager with animation parameter
-     *
-     *
      */
 
     public boolean loadFragment(Fragment fragment, FragmentManager fragmentManager) {
@@ -60,7 +58,8 @@ public class LoaderFragment {
     public boolean hideOldAndShowNewFrag(FragmentManager fragmentManager, Fragment activeFragment, Fragment showingFragment) {
         if (activeFragment != null) {
             fragmentManager
-                    .beginTransaction().hide(activeFragment)
+                    .beginTransaction()
+                    .hide(activeFragment)
                     .show(showingFragment)
                     .commit();
             return true;
@@ -73,24 +72,24 @@ public class LoaderFragment {
                                                             Fragment showingFragment,
                                                             int newPosition) {
 
-        if(activeFragment != null) {
-            if(newPosition == 0) {
+        if (activeFragment != null) {
+            if (newPosition == 0) {
                 fragmentManager
                         .beginTransaction()
                         .hide(activeFragment)
                         .show(showingFragment)
                         .commit();
             }
-            if(startingPosition > newPosition) {
+            if (startingPosition > newPosition) {
                 fragmentManager
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right )
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                         .hide(activeFragment)
                         .show(showingFragment)
                         .commit();
 
             }
-            if(startingPosition < newPosition) {
+            if (startingPosition < newPosition) {
 
                 fragmentManager
                         .beginTransaction()
@@ -113,20 +112,20 @@ public class LoaderFragment {
      * Используется в главном меню
      * */
     public boolean loadFragmentWithBackStackAnimation(Fragment fragment, FragmentManager fragmentManager, int newPosition) {
-        if(fragment != null) {
-            if(newPosition == 0) {
+        if (fragment != null) {
+            if (newPosition == 0) {
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.container, fragment).commit();
             }
-            if(startingPosition > newPosition) {
+            if (startingPosition > newPosition) {
                 fragmentManager
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right )
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                         .replace(R.id.container, fragment).commit();
 
             }
-            if(startingPosition < newPosition) {
+            if (startingPosition < newPosition) {
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)

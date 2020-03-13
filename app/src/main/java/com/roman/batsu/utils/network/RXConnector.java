@@ -1,9 +1,9 @@
 package com.roman.batsu.utils.network;
 
-import com.roman.batsu.utils.api.ApiSchedule;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.roman.batsu.utils.api.ApiSchedule;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +47,8 @@ public class RXConnector {
         return getRetrofitClient()
                 .create(ApiSchedule.class);
     }
+
+
 
 
 

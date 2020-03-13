@@ -25,6 +25,9 @@ import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAB_1 = "com.roman.batsu.ACTION_HOME";
+    private static final String TAB_2 = "com.roman.batsu.ACTION_DASHBOARD";
+    private static final String TAB_3 = "com.roman.batsu.ACTION_NOTIFICATION";
 
     private BottomNavigationView bottomNavigationView;
     private LoaderFragment loaderFragment;
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (noConnection) {
             showToast(getString(R.string.no_internet_connection));
         }
+        getShortCutsIntents();
     }
 
     private void toolBarSetUp() {
@@ -115,12 +119,44 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    private void getShortCutsIntents() {
+        final String action = getIntent().getAction();
+        if (action != null) {
+            switch (action) {
+                case TAB_1:
+                    toolbar_title.setText(toolbarTitle[0]);
+                    setShortCutsFragment(active, fragment1);
+                    active = fragment1;
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+                    break;
+                case TAB_2:
+                    toolbar_title.setText(toolbarTitle[1]);
+                    setShortCutsFragment(active, fragment2);
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
+                    active = fragment2;
+                    break;
+                case TAB_3:
+                    toolbar_title.setText(toolbarTitle[2]);
+                    setShortCutsFragment(active, fragment3);
+                    active = fragment3;
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
+                    break;
 
-    //устанавливаем текущий фрагмент
+            }
+
+        }
+    }
+
+    //устанавливаем текущий фрагмент с анимацией
     void setLoaderFragment(Fragment active, Fragment currentFragment, int currentPosition){
         loaderFragment.hideOldAndShowNewFragWithBackStackAnimation(
                 getSupportFragmentManager(),active, currentFragment,
                 currentPosition);
+    }
+
+    //устанавливаем текущий фрагмент с анимацией
+    void setShortCutsFragment(Fragment active, Fragment currentFragment){
+        loaderFragment.hideOldAndShowNewFrag(getSupportFragmentManager(),active, currentFragment);
     }
 
     @Override
