@@ -125,21 +125,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     setShortCutsFragment(active, fragment1);
                     active = fragment1;
                     bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-
                     break;
                 case TAB_2:
                     toolbar_title.setText(toolbarTitle[1]);
                     setShortCutsFragment(active, fragment2);
                     bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
                     active = fragment2;
-
                     break;
                 case TAB_3:
                     toolbar_title.setText(toolbarTitle[2]);
                     setShortCutsFragment(active, fragment3);
                     active = fragment3;
                     bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
-
                     break;
 
             }
