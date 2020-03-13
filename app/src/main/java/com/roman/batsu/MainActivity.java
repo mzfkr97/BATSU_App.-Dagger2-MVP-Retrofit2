@@ -68,10 +68,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         toolBarSetUp();
 
-
-        if (savedInstanceState == null) {
-            toolbar_title.setText(toolbarTitle[0]);
-        }
+        if (savedInstanceState == null) { toolbar_title.setText(toolbarTitle[0]);        }
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -166,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public void onBackPressed() {
         int selectedItemId = bottomNavigationView.getSelectedItemId();
-
         if (isOpenShortCutsIntent) {
             MainActivity.this.finish();
         } else if (R.id.navigation_home != selectedItemId) {
