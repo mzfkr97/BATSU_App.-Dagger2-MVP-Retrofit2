@@ -79,11 +79,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (noConnection) {
             showToast(getString(R.string.no_internet_connection));
         }
-
     }
-
-
-
 
     private void toolBarSetUp() {
         setSupportActionBar(toolbar);
