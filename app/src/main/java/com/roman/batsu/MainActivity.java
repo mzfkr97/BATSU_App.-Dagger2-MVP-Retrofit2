@@ -11,15 +11,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.roman.batsu.ui.dashboard.DashboardFragment;
 import com.roman.batsu.ui.home.ContainerHome;
 import com.roman.batsu.ui.note_frags.NotificationsFragment;
 import com.roman.batsu.utils.BottomNavigationViewHelper;
-import com.roman.batsu.utils.ToolbarDataSetter;
 import com.roman.batsu.utils.LoaderFragment;
+import com.roman.batsu.utils.ToolbarDataSetter;
 import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.NetworkChecker;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import es.dmoral.toasty.Toasty;
 
@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loaderFragment = ((MyApplication) getApplication()).getLoaderFragment();
+        loaderFragment = MyApplication.getComponent().getLoaderFragment();
+
         bottomNavigationView = findViewById(R.id.navigation);
         noConnection = !NetworkChecker.isNetworkAvailable(this);
         toolbar = findViewById(R.id.toolbar);
@@ -81,39 +82,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // добавляем пункты меню
-//       // menu.add(Menu.NONE, IDM_OPEN, Menu.NONE, "Открыть");
-//        menu.add(Menu.NONE, IDM_SAVE, Menu.NONE, "Сохранить");
-//        menu.add(Menu.NONE, IDM_OPEN, Menu.NONE, "Открыть")
-//                .setIcon(R.drawable.icon_app_foreground);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle item selection
-//        switch (item.getItemId()) {
-//            case IDM_OPEN:
-//                Toast.makeText(this, "Кнопка Menu есть", Toast.LENGTH_LONG).show();
-//                return true;
-//            case IDM_SAVE:
-//                String error_message = getString(R.string.app_name) +
-//                    Build.MODEL + "\n\nВерсия приложения " +
-//                        BuildConfig.VERSION_NAME;
-//
-//                Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
-//                        Uri.fromParts("mailto", "slutskapp@gmail.com", null));
-//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-//                emailIntent.putExtra(Intent.EXTRA_TEXT, error_message);
-//                startActivity(Intent.createChooser(emailIntent, getString(R.string.app_name)));
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
 
 

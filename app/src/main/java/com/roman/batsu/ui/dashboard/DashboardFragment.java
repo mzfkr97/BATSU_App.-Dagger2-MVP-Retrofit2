@@ -57,10 +57,8 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
         viewInit(view);
         setUpRecyclerView(view);
-        if (getActivity() != null) {
-            rxConnector = ((MyApplication) getActivity()
-                    .getApplication()).getRxConnector();
-        }
+
+        rxConnector =  MyApplication.getComponent().getRxConnector();
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

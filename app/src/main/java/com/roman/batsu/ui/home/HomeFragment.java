@@ -58,10 +58,9 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (getActivity() != null) {
-            rxConnector = ((MyApplication) getActivity()
-                    .getApplication()).getRxConnector();
-        }
+
+        rxConnector =  MyApplication.getComponent().getRxConnector();
+
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
