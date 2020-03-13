@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private BottomNavigationView bottomNavigationView;
     private LoaderFragment loaderFragment;
-    private boolean noConnection;
     private Toolbar toolbar;
 
     private final String[] toolbarTitle = {
@@ -44,9 +43,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment active = fragment1;
 
-    // идентификаторы для пунктов меню
-    private static final int IDM_OPEN = 101;
-    private static final int IDM_SAVE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loaderFragment = MyApplication.getComponent().getLoaderFragment();
 
         bottomNavigationView = findViewById(R.id.navigation);
-        noConnection = !NetworkChecker.isNetworkAvailable(this);
+        boolean noConnection = !NetworkChecker.isNetworkAvailable(this);
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_subTitle = toolbar.findViewById(R.id.toolbar_subTitle);
