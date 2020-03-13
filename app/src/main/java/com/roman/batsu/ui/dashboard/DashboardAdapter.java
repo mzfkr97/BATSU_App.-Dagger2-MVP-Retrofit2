@@ -58,9 +58,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         if (color == 1){
             return Color.WHITE;
         } else if (color == 2){
-            return Color.RED;
+            return Color.YELLOW;
         } else if (color == 3){
-            return Color.BLUE;
+            return Color.RED;
         } else {
             return Color.BLACK;
         }

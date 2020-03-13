@@ -1,5 +1,6 @@
 package com.roman.batsu;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.roman.batsu.ui.dashboard.DashboardFragment;
+import com.roman.batsu.ui.dialogfragment.OnBoardingDialog;
 import com.roman.batsu.ui.home.ContainerHome;
 import com.roman.batsu.ui.note_frags.NotificationsFragment;
 import com.roman.batsu.utils.BottomNavigationViewHelper;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final String TAB_1 = "com.roman.batsu.ACTION_HOME";
     private static final String TAB_2 = "com.roman.batsu.ACTION_DASHBOARD";
     private static final String TAB_3 = "com.roman.batsu.ACTION_NOTIFICATION";
+    private static final String PREFS_NAME = "firstStartRun";
 
     private BottomNavigationView bottomNavigationView;
     private LoaderFragment loaderFragment;
@@ -76,6 +79,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             showToast(getString(R.string.no_internet_connection));
         }
         getShortCutsIntents();
+        doFirstRun();
+    }
+
+    private void doFirstRun() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (settings.getBoolean("isFirstRun", true)) {
+            OnBoardingDialog onBoardingDialog = OnBoardingDialog.newInstance();
+            onBoardingDialog.setCancelable(false);
+            onBoardingDialog.show(getSupportFragmentManager(), "onBoardingDialogFragment");
+//            SharedPreferences.Editor editor = settings.edit();
+//            editor.putBoolean("isFirstRun", false);
+//            editor.apply();
+        }
     }
 
     private void toolBarSetUp() {

@@ -7,8 +7,8 @@ android {
         applicationId "com.roman.batsu"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.002"
+        versionCode 4
+        versionName "1.003"
         multiDexEnabled true
 
     }

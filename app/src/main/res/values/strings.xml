@@ -10,6 +10,11 @@
     <string name="description_header_notify">График работы столовой:\n07:30 – 19:00\nВыходной: суббота, воскресенье</string>
     <string name="fa_dot">\uf064</string>
     <string name="share_popup">Поделиться</string>
+    <string name="on_boarding_dialog_title">Добро пожаловать!</string>
+    <string name="on_boarding_dialog_description">
+        Это приложение написано для студентов заочной формы обучения, учащихся 82, 83, 84 группы факультета предпринимательства и управления Белорусского Государственного
+        аграрно технического университета.
+    </string>
 
     <!--shortcut -->
     <string name="shortcut_home">Расписание</string>
