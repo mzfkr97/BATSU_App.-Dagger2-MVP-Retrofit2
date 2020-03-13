@@ -3,6 +3,7 @@
     <string name="title_home">Расписание</string>
     <string name="title_dashboard">Информация</string>
     <string name="title_notifications">Звонки</string>
+    <string name="image_link">https://icon-icons.com/icon/creative-creative-idea-idea-pencil-search-think/107047</string>
 
     <string name="no_internet_connection">Отсутствует подключение к сети</string>
     <string name="warning">Режим работы столовой:</string>
