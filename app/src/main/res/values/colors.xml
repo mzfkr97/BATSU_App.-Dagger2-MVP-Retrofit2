@@ -5,7 +5,7 @@
     <color name="colorAccent">#FAE102</color>
 
     <color name="colorError">#FFFF0000</color>
-    <color name="colorTabIndicator">#FFF176</color>
+    <color name="colorTabIndicator">#ffff00</color>
 
     <color name="colorBackground">#EBEFF5</color>
     <color name="colorCardBackground">#FFFFFF</color>
