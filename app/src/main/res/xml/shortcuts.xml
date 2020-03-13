@@ -7,7 +7,7 @@
         android:shortcutId="shortBus"
         android:enabled="true"
         android:shortcutShortLabel="@string/shortcut_home"
-        android:shortcutLongLabel="@string/shortcut_long_home"
+        android:icon="@drawable/tab_1_short_cuts"
         tools:targetApi="n_mr1">
         <intent
             android:action="com.roman.batsu.ACTION_HOME"
@@ -23,7 +23,7 @@
         android:shortcutId="shortHealth"
         android:enabled="true"
         android:shortcutShortLabel="@string/shortcut_dashboard"
-        android:shortcutLongLabel="@string/shortcut_long_dashboard"
+        android:icon="@drawable/tab_2_short_cuts"
         tools:targetApi="n_mr1">
         <intent
             android:action="com.roman.batsu.ACTION_DASHBOARD"
@@ -36,7 +36,7 @@
         android:shortcutId="shortCinema"
         android:enabled="true"
         android:shortcutShortLabel="@string/shortcut_notification"
-        android:shortcutLongLabel="@string/shortcut_long_notification"
+        android:icon="@drawable/tab_3_short_cuts"
         tools:targetApi="n_mr1">
         <intent
             android:action="com.roman.batsu.ACTION_NOTIFICATION"

@@ -12,13 +12,10 @@
 
     <!--shortcut -->
     <string name="shortcut_home">Расписание</string>
-    <string name="shortcut_long_home">Открыть расписание</string>
-
     <string name="shortcut_dashboard">Информация</string>
-    <string name="shortcut_long_dashboard">Открыть информацию</string>
-
     <string name="shortcut_notification">Звонки</string>
-    <string name="shortcut_long_notification">Открыть звонки</string>
+
+    
     <string name="no_server_response">Нет ответа от сервера</string>
     <string name="checkYourURLConnection">Возможно у вас отсуствует соединение либо сервер не отвечает.\nПовторите попытку позже</string>
     <string name="refresh_data">Обновить</string>

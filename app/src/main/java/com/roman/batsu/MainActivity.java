@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     };
     private TextView toolbar_title, toolbar_subTitle;
 
-    final Fragment fragment1 = ContainerHome.newInstance();
-    final Fragment fragment2 = DashboardFragment.newInstance();
-    final Fragment fragment3 = NotificationsFragment.newInstance();
-    final FragmentManager fragmentManager = getSupportFragmentManager();
+    private final Fragment fragment1 = ContainerHome.newInstance();
+    private final Fragment fragment2 = DashboardFragment.newInstance();
+    private final Fragment fragment3 = NotificationsFragment.newInstance();
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment active = fragment1;
-
+    private boolean isOpenShortCutsIntent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         fragmentManager.beginTransaction().add(R.id.container, fragment3, "3").hide(fragment3).commit();
         fragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
-        fragmentManager.beginTransaction().add(R.id.container,fragment1, "1").commit();
+        fragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
         toolbar_subTitle.setText(new ToolbarDataSetter().setDataInToolbar());
 
@@ -128,18 +128,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     setShortCutsFragment(active, fragment1);
                     active = fragment1;
                     bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
                     break;
                 case TAB_2:
                     toolbar_title.setText(toolbarTitle[1]);
                     setShortCutsFragment(active, fragment2);
                     bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
                     active = fragment2;
+
                     break;
                 case TAB_3:
                     toolbar_title.setText(toolbarTitle[2]);
                     setShortCutsFragment(active, fragment3);
                     active = fragment3;
                     bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
+
                     break;
 
             }
@@ -148,21 +151,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     //устанавливаем текущий фрагмент с анимацией
-    void setLoaderFragment(Fragment active, Fragment currentFragment, int currentPosition){
+    void setLoaderFragment(Fragment active, Fragment currentFragment, int currentPosition) {
         loaderFragment.hideOldAndShowNewFragWithBackStackAnimation(
-                getSupportFragmentManager(),active, currentFragment,
+                getSupportFragmentManager(), active, currentFragment,
                 currentPosition);
     }
 
     //устанавливаем текущий фрагмент с анимацией
-    void setShortCutsFragment(Fragment active, Fragment currentFragment){
-        loaderFragment.hideOldAndShowNewFrag(getSupportFragmentManager(),active, currentFragment);
+    void setShortCutsFragment(Fragment active, Fragment currentFragment) {
+        isOpenShortCutsIntent = true;
+        loaderFragment.hideOldAndShowNewFrag(getSupportFragmentManager(), active, currentFragment);
     }
 
     @Override
     public void onBackPressed() {
         int selectedItemId = bottomNavigationView.getSelectedItemId();
-        if (R.id.navigation_home != selectedItemId) {
+
+        if (isOpenShortCutsIntent) {
+            MainActivity.this.finish();
+        } else if (R.id.navigation_home != selectedItemId) {
             setLoaderFragment(active, fragment1, 1);
             active = fragment1;
             bottomNavigationView.setSelectedItemId(R.id.navigation_home);
