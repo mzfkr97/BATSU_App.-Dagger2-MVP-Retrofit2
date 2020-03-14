@@ -31,22 +31,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final String TAB_2 = "com.roman.batsu.ACTION_DASHBOARD";
     private static final String TAB_3 = "com.roman.batsu.ACTION_NOTIFICATION";
     private static final String PREFS_NAME = "firstStartRun";
-
-    private BottomNavigationView bottomNavigationView;
-    private LoaderFragment loaderFragment;
-    private Toolbar toolbar;
-
     private final String[] toolbarTitle = {
             "Расписание",
             "Информация",
             "Звонки"
     };
-    private TextView toolbar_title, toolbar_subTitle;
-
     private final Fragment fragment1 = ViewPagerHome.newInstance();
     private final Fragment fragment2 = NewsFragment.newInstance();
     private final Fragment fragment3 = RingsFragment.newInstance();
     private final FragmentManager fragmentManager = getSupportFragmentManager();
+    private BottomNavigationView bottomNavigationView;
+    private LoaderFragment loaderFragment;
+    private Toolbar toolbar;
+    private TextView toolbar_title;
     private Fragment active = fragment1;
     private boolean isOpenShortCutsIntent = false;
 
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         boolean noConnection = !NetworkChecker.isNetworkAvailable(this);
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        toolbar_subTitle = toolbar.findViewById(R.id.toolbar_subTitle);
+        TextView toolbar_subTitle = toolbar.findViewById(R.id.toolbar_subTitle);
 
         fragmentManager.beginTransaction().add(R.id.container, fragment3, "3").hide(fragment3).commit();
         fragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
