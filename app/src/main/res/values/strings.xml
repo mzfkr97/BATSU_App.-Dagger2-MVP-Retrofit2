@@ -9,6 +9,8 @@
     <string name="warning">Режим работы столовой:</string>
     <string name="description_header_notify">График работы столовой:\n07:30 – 19:00\nВыходной: суббота, воскресенье</string>
     <string name="fa_dot">\uf064</string>
+    <string name="fa_comma">\uf0c6</string>
+    <string name="fa_comma_dot">\uf111</string>
     <string name="share_popup">Поделиться</string>
     <string name="on_boarding_dialog_title">Добро пожаловать!</string>
     <string name="on_boarding_dialog_description">

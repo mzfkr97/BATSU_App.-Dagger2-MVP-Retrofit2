@@ -42,7 +42,7 @@ public class NotificationsFragment extends Fragment  {
 
         inputStream = getResources().openRawResource(R.raw.ring_lessons);
         notificationArrayList = jsonReader.createListFromJson(inputStream);
-        adapter = new NotificationAdapter(notificationArrayList);
+        adapter = new NotificationAdapter(getActivity(), notificationArrayList);
         recyclerView.setAdapter(adapter);
 
         return view;

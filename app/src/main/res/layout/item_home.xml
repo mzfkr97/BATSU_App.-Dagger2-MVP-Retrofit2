@@ -5,8 +5,8 @@
     android:id="@+id/cardNotification"
     style="@style/myCardViewStyle"
     android:layout_margin="@dimen/card_view_layout_margin"
-    app:cardCornerRadius="@dimen/card_view_corner_radius"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/card_view_corner_radius">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,15 +16,29 @@
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
+            android:id="@+id/textDrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:alpha="0.7"
+            android:fontFamily="@font/font_awesome"
+            android:text="@string/fa_comma_dot"
+            android:textColor="?attr/colorAccent"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title" />
+
+        <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textDrop"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Понедельник" />
 
@@ -48,10 +62,10 @@
             android:id="@+id/border"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:alpha=".5"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="8dp"
+            android:alpha=".5"
             android:background="@color/browser_actions_title_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,13 +86,13 @@
 
         <TextView
             android:id="@+id/textFirstLess"
-            android:layout_width="0dp"
+            style="@style/textPrimary"
 
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:textAlignment="center"
-            style="@style/textPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateText"
@@ -99,10 +113,10 @@
 
         <TextView
             android:id="@+id/textSecondLesson"
+            style="@style/textPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            style="@style/textPrimary"
 
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,10 +139,10 @@
 
         <TextView
             android:id="@+id/textThreeLesson"
+            style="@style/textPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            style="@style/textPrimary"
 
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,10 +166,10 @@
 
         <TextView
             android:id="@+id/textFourLesson"
+            style="@style/textPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            style="@style/textPrimary"
 
             android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"

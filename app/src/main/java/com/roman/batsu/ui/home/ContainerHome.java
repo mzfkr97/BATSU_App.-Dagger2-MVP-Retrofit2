@@ -24,9 +24,7 @@ public class ContainerHome extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.view_pager, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.view_pager, container, false);
     }
 
     @Override

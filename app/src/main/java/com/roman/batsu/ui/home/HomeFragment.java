@@ -62,13 +62,10 @@ public class HomeFragment extends Fragment {
         rxConnector =  MyApplication.getComponent().getRxConnector();
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                progressBar.setVisibility(View.VISIBLE);
-                getNewsData(getFileName());
-                netWorkCheck();
-            }
+        swipeContainer.setOnRefreshListener(() -> {
+            progressBar.setVisibility(View.VISIBLE);
+            getNewsData(getFileName());
+            netWorkCheck();
         });
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -81,14 +78,11 @@ public class HomeFragment extends Fragment {
         netWorkCheck();
         getNewsData(getFileName());
 
-        button_error.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                netWorkCheck();
-                getNewsData(getFileName());
+        button_error.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            netWorkCheck();
+            getNewsData(getFileName());
 
-            }
         });
         return view;
     }
@@ -151,7 +145,7 @@ public class HomeFragment extends Fragment {
 
                 if( response.body() != null){
                     List<InputResult> jsonArray = response.body();
-                    adapter = new HomeAdapter(jsonArray);
+                    adapter = new HomeAdapter(getActivity(), jsonArray);
                     recyclerView.setAdapter(adapter);
                     cardNotification.setVisibility(View.GONE);
                     swipeContainer.setRefreshing(false);
@@ -164,7 +158,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<InputResult>> call, @NonNull Throwable t) {
-                Log.d("TAG", "onFailure: " + t.getMessage());
                 onError();
             }
 

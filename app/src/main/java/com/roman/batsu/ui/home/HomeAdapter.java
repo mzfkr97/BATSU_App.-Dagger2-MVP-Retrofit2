@@ -1,5 +1,6 @@
 package com.roman.batsu.ui.home;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
 import com.roman.batsu.ui.home.pojos.InputResult;
+import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private List<InputResult> responseList;
+    private Context mContext;
 
-    HomeAdapter(List<InputResult> responseList) {
+    public HomeAdapter( Context mContext, List<InputResult> responseList) {
+        this.mContext = mContext;
         this.responseList = responseList;
+
     }
 
     @NonNull
@@ -31,9 +36,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.title.setText(responseList.get(position).getDay());
         holder.dateText.setText(responseList.get(position).getDate());
-
+        holder.textDrop.setTextColor(new ColorMaker(mContext).getRandomMaterialColor("400"));
         String empty =  "size =   " + responseList.get(position).getLessons().size();
 
         try{
@@ -63,13 +69,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView title, dateText, textFirstLess, textSecondLesson, textThreeLesson, textFourLesson;
+        private TextView textDrop, title, dateText, textFirstLess, textSecondLesson, textThreeLesson, textFourLesson;
         private TextView countFirstLesson, countSecondLesson,
                 countThreeLesson, countFourLesson;
 
         ViewHolder(@NonNull View view) {
             super(view);
+            textDrop = view.findViewById(R.id.textDrop);
             title = view.findViewById(R.id.title);
             dateText = view.findViewById(R.id.dateText);
             textFirstLess = view.findViewById(R.id.textFirstLess);

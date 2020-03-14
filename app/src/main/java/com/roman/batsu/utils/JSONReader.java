@@ -18,15 +18,12 @@ import java.util.List;
 public class JSONReader {
 
     private List<Notification> jsonList = new ArrayList<>();
-
     /*
      * Read jsonFile from assets folder
      * call this:
      * inputStream = getResources().openRawResource(R.raw.file_json);
      * String jsonTaxiString = jsonReader.readJsonDataFromFile(getMyInputStream());
      */
-
-
 
     private String readJsonDataFromFile(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
