@@ -13,11 +13,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.roman.batsu.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class ContainerHome extends Fragment {
+public class ViewPagerHome extends Fragment {
 
 
-    public static ContainerHome newInstance() {
-        return new ContainerHome();
+    public static ViewPagerHome newInstance() {
+        return new ViewPagerHome();
     }
 
     private static final int NUM_OF_TABS = 3;

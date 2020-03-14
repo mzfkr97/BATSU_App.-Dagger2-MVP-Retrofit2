@@ -11,16 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.home.pojos.InputResult;
 import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-    private List<InputResult> responseList;
+    private List<Home> responseList;
     private Context mContext;
 
-    public HomeAdapter( Context mContext, List<InputResult> responseList) {
+    public HomeAdapter( Context mContext, List<Home> responseList) {
         this.mContext = mContext;
         this.responseList = responseList;
 

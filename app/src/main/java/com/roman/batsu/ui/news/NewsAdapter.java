@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.dashboard;
+package com.roman.batsu.ui.news;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -12,16 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.dashboard.ResponceDashboard.ResponseDashboard;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
 
 
-public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private List<ResponseDashboard> dashboardList;
+    private List<News> dashboardList;
 
     private static DashboardItemClick onClickPopup;
 
@@ -38,20 +37,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             R.drawable.a_stock
     };
 
-    DashboardAdapter(List<ResponseDashboard> dashboardList) {
+    NewsAdapter(List<News> dashboardList) {
         this.dashboardList = dashboardList;
     }
 
     @NonNull
     @Override
-    public DashboardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dashboard, parent, false);
-        return new DashboardAdapter.ViewHolder(view);
+        return new NewsAdapter.ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull DashboardAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         String web = dashboardList.get(position).getWeb_link();
 
         int color_hex = dashboardList.get(position).getHex();
@@ -70,7 +69,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         setImageFromPicasso(holder, image_url);
     }
 
-    private void setImageFromPicasso(DashboardAdapter.ViewHolder holder, String image_url){
+    private void setImageFromPicasso(NewsAdapter.ViewHolder holder, String image_url){
         if(image_url!=null && !image_url.isEmpty()){
             Picasso.get()
                     .load(image_url)
@@ -125,15 +124,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
         @Override
         public void onClick(View view) {
-            if (DashboardAdapter.onClickPopup != null) {
-                DashboardAdapter.onClickPopup
+            if (NewsAdapter.onClickPopup != null) {
+                NewsAdapter.onClickPopup
                         .onClickPopup(dashboardList.get(getAdapterPosition()), view);
             }
         }
     }
 
     void setAutoOnItemClickListener(DashboardItemClick popupItemClick) {
-        DashboardAdapter.onClickPopup = popupItemClick;
+        NewsAdapter.onClickPopup = popupItemClick;
     }
 
     interface DashboardItemClick {
@@ -141,6 +140,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
          *  private static PopupItemClick onAutoItemClickListener;
          *
          * */
-        void onClickPopup(ResponseDashboard item, View view);
+        void onClickPopup(News item, View view);
     }
 }

@@ -1,10 +1,10 @@
-package com.roman.batsu.ui.dashboard.ResponceDashboard;
+package com.roman.batsu.ui.news;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ResponseDashboard implements Serializable {
+public class News implements Serializable {
 
 
     @SerializedName("title")

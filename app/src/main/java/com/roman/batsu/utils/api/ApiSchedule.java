@@ -1,7 +1,7 @@
 package com.roman.batsu.utils.api;
 
-import com.roman.batsu.ui.dashboard.ResponceDashboard.ResponseDashboard;
-import com.roman.batsu.ui.home.pojos.InputResult;
+import com.roman.batsu.ui.news.News;
+import com.roman.batsu.ui.home.Home;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ public interface ApiSchedule {
      */
 
     @GET("image/{fileName}")
-    Call <List<InputResult>> getSchedule(@Path("fileName") String fileName);
+    Call <List<Home>> getSchedule(@Path("fileName") String fileName);
 
     /**
      * { http://mir-dverei.by/image/dashboard_information.json }
      */
 
     @GET("image/{fileName}")
-    Call <List<ResponseDashboard>> getResponseDashBoard(@Path("fileName") String fileName);
+    Call <List<News>> getResponseDashBoard(@Path("fileName") String fileName);
 
 
 }

@@ -1,8 +1,8 @@
-package com.roman.batsu.ui.home.pojos;
+package com.roman.batsu.ui.home;
 
 import java.util.List;
 
-public class InputResult {
+public class Home {
 
 
         private String day;

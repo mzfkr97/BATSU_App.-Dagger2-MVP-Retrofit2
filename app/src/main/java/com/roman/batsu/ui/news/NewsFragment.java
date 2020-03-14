@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.dashboard;
+package com.roman.batsu.ui.news;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.dashboard.ResponceDashboard.ResponseDashboard;
 import com.roman.batsu.utils.Constants;
 import com.roman.batsu.utils.api.ApiSchedule;
 import com.roman.batsu.utils.application.MyApplication;
@@ -32,11 +31,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DashboardFragment extends Fragment implements DashboardAdapter.DashboardItemClick {
+public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemClick {
 
     private RecyclerView recyclerView;
     private RXConnector rxConnector;
-    private List<ResponseDashboard> dashboardList = new ArrayList<>();
+    private List<News> dashboardList = new ArrayList<>();
     private long mLastClickTime = 0;
     private CardView cardNotification;
     private Button button_error;
@@ -44,8 +43,8 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
     private SwipeRefreshLayout swipeContainer;
 
 
-    public static DashboardFragment newInstance() {
-        return new DashboardFragment();
+    public static NewsFragment newInstance() {
+        return new NewsFragment();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -122,10 +121,10 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         mLastClickTime = SystemClock.elapsedRealtime();
 
         ApiSchedule apiService = rxConnector.getScheduleApiInterface();
-        Call<List<ResponseDashboard>> call = apiService.getResponseDashBoard("dashboard_information.json");
-        call.enqueue(new Callback<List<ResponseDashboard>>() {
+        Call<List<News>> call = apiService.getResponseDashBoard("dashboard_information.json");
+        call.enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<List<ResponseDashboard>>  call, Response<List<ResponseDashboard>> response) {
+            public void onResponse(Call<List<News>>  call, Response<List<News>> response) {
                 if( response.body() != null){
                     dashboardList = response.body();
                     createListData(dashboardList);
@@ -135,7 +134,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
                 }
             }
             @Override
-            public void onFailure(Call<List<ResponseDashboard>> call, Throwable t) {
+            public void onFailure(Call<List<News>> call, Throwable t) {
                 Log.d("TAG", "onFailure: " + t.getMessage());
                 onError();
             }
@@ -148,8 +147,8 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         swipeContainer.setRefreshing(false);
     }
 
-    private void createListData(List<ResponseDashboard> listData) {
-        DashboardAdapter adapter = new DashboardAdapter(listData);
+    private void createListData(List<News> listData) {
+        NewsAdapter adapter = new NewsAdapter(listData);
         recyclerView.setAdapter(adapter);
         cardNotification.setVisibility(View.GONE);
         swipeContainer.setRefreshing(false);
@@ -158,7 +157,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
     }
 
     @Override
-    public void onClickPopup(ResponseDashboard item, View view) {
+    public void onClickPopup(News item, View view) {
         final String title = item.getTitle();
         final String description = item.getDescription();
 

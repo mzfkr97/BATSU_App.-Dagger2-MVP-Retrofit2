@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.note_frags;
+package com.roman.batsu.ui.rings;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,27 +14,27 @@ import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+public class RingsAdapter extends RecyclerView.Adapter<RingsAdapter.ViewHolder> {
 
 
-    private List<Notification> notificationList;
+    private List<Rings> notificationList;
     private Context mContext;
 
-    NotificationAdapter(Context mContext,List<Notification> notificationList) {
+    RingsAdapter(Context mContext, List<Rings> notificationList) {
         this.notificationList = notificationList;
         this.mContext = mContext;
     }
 
     @NonNull
     @Override
-    public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RingsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification, parent, false);
         return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RingsAdapter.ViewHolder holder, int position) {
         holder.title.setText(notificationList.get(position).getTitle());
         holder.first_lesson.setText(notificationList.get(position).getFirst_lesson());
         holder.textDrop.setBackgroundColor(new ColorMaker(mContext).getRandomMaterialColor("400"));

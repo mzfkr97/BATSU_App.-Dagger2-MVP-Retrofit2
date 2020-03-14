@@ -1,6 +1,6 @@
 package com.roman.batsu.utils;
 
-import com.roman.batsu.ui.note_frags.Notification;
+import com.roman.batsu.ui.rings.Rings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class JSONReader {
 
-    private List<Notification> jsonList = new ArrayList<>();
+    private List<Rings> jsonList = new ArrayList<>();
     /*
      * Read jsonFile from assets folder
      * call this:
@@ -43,7 +43,7 @@ public class JSONReader {
     }
 
 
-    public List<Notification> createListFromJson(InputStream inputStream) {
+    public List<Rings> createListFromJson(InputStream inputStream) {
         try {
             String jsonTaxiString = readJsonDataFromFile(inputStream);
             JSONArray menuTaxiJsonArray = new JSONArray(jsonTaxiString);
@@ -54,7 +54,7 @@ public class JSONReader {
                 String title = taxiItemObject.getString(Constants.TITLE);
                 String first_lesson = taxiItemObject.getString(Constants.FIRST_LESSON);
 
-                Notification itemCatalog = new Notification(title, first_lesson);
+                Rings itemCatalog = new Rings(title, first_lesson);
                 jsonList.add(itemCatalog);
             }
 

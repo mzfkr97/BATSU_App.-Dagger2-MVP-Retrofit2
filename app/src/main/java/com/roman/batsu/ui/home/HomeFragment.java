@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.home.pojos.InputResult;
 import com.roman.batsu.utils.api.ApiSchedule;
 import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.NetworkChecker;
@@ -34,7 +33,7 @@ public class HomeFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private RXConnector rxConnector;
-    private ArrayList<InputResult> articlesList = new ArrayList<>();
+    private ArrayList<Home> articlesList = new ArrayList<>();
     private HomeAdapter adapter;
     private RecyclerView recyclerView;
     private CardView cardNotification;
@@ -148,13 +147,13 @@ public class HomeFragment extends Fragment {
         mLastClickTime = SystemClock.elapsedRealtime();
 
         ApiSchedule apiService = rxConnector.getScheduleApiInterface();
-        Call<List<InputResult>> call = apiService.getSchedule(fileName);
-        call.enqueue(new Callback<List<InputResult>> () {
+        Call<List<Home>> call = apiService.getSchedule(fileName);
+        call.enqueue(new Callback<List<Home>> () {
             @Override
-            public void onResponse(@NonNull Call<List<InputResult>>  call, @NonNull Response<List<InputResult>>  response) {
+            public void onResponse(@NonNull Call<List<Home>>  call, @NonNull Response<List<Home>>  response) {
 
                 if( response.body() != null){
-                    List<InputResult> jsonArray = response.body();
+                    List<Home> jsonArray = response.body();
                     adapter = new HomeAdapter(getActivity(), jsonArray);
                     recyclerView.setAdapter(adapter);
                     cardNotification.setVisibility(View.GONE);
@@ -167,7 +166,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<InputResult>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Home>> call, @NonNull Throwable t) {
                 onError();
             }
 

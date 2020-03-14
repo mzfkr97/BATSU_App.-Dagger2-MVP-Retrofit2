@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.roman.batsu.ui.dashboard.DashboardFragment;
+import com.roman.batsu.ui.news.NewsFragment;
 import com.roman.batsu.ui.dialogfragment.OnBoardingDialog;
-import com.roman.batsu.ui.home.ContainerHome;
-import com.roman.batsu.ui.note_frags.NotificationsFragment;
+import com.roman.batsu.ui.home.ViewPagerHome;
+import com.roman.batsu.ui.rings.RingsFragment;
 import com.roman.batsu.utils.BottomNavigationViewHelper;
 import com.roman.batsu.utils.LoaderFragment;
 import com.roman.batsu.utils.ToolbarDataSetter;
@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     };
     private TextView toolbar_title, toolbar_subTitle;
 
-    private final Fragment fragment1 = ContainerHome.newInstance();
-    private final Fragment fragment2 = DashboardFragment.newInstance();
-    private final Fragment fragment3 = NotificationsFragment.newInstance();
+    private final Fragment fragment1 = ViewPagerHome.newInstance();
+    private final Fragment fragment2 = NewsFragment.newInstance();
+    private final Fragment fragment3 = RingsFragment.newInstance();
     private final FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment active = fragment1;
     private boolean isOpenShortCutsIntent = false;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //dagger2
         loaderFragment = MyApplication.getComponent().getLoaderFragment();
 
         bottomNavigationView = findViewById(R.id.navigation);
@@ -68,11 +69,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
         toolbar_subTitle.setText(new ToolbarDataSetter().setDataInToolbar());
-
         toolBarSetUp();
-
-        if (savedInstanceState == null) { toolbar_title.setText(toolbarTitle[0]);        }
-
+        if (savedInstanceState == null) {
+            toolbar_title.setText(toolbarTitle[0]);
+        }
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         if (noConnection) {
@@ -88,9 +88,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             OnBoardingDialog onBoardingDialog = OnBoardingDialog.newInstance();
             onBoardingDialog.setCancelable(false);
             onBoardingDialog.show(getSupportFragmentManager(), "onBoardingDialogFragment");
-//            SharedPreferences.Editor editor = settings.edit();
-//            editor.putBoolean("isFirstRun", false);
-//            editor.apply();
         }
     }
 
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void showToast(String toastMessage) {
         Toasty.error(this, toastMessage, Toast.LENGTH_LONG, true).show();
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -128,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     active = fragment3;
                     return true;
             }
-
         }
         return false;
     }
@@ -155,15 +150,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     active = fragment3;
                     bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
                     break;
-
             }
-
         }
     }
 
     //устанавливаем текущий фрагмент с анимацией
     void setLoaderFragment(Fragment active, Fragment currentFragment, int currentPosition) {
-
         loaderFragment.hideOldAndShowNewFragWithBackStackAnimation(
                 getSupportFragmentManager(), active, currentFragment,
                 currentPosition);

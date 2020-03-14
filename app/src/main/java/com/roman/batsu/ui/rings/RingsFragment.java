@@ -1,5 +1,6 @@
-package com.roman.batsu.ui.note_frags;
+package com.roman.batsu.ui.rings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +19,20 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsFragment extends Fragment  {
+public class RingsFragment extends Fragment  {
 
     private RecyclerView recyclerView;
-    private NotificationAdapter adapter;
-    private List<Notification> notificationArrayList = new ArrayList<>();
+    private RingsAdapter adapter;
+    private List<Rings> notificationArrayList = new ArrayList<>();
 
     private JSONReader jsonReader= new JSONReader();
     private InputStream inputStream;
 
-    public static NotificationsFragment newInstance() {
-        return new NotificationsFragment();
+    public static RingsFragment newInstance() {
+        return new RingsFragment();
     }
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
 
@@ -42,7 +44,7 @@ public class NotificationsFragment extends Fragment  {
 
         inputStream = getResources().openRawResource(R.raw.ring_lessons);
         notificationArrayList = jsonReader.createListFromJson(inputStream);
-        adapter = new NotificationAdapter(getActivity(), notificationArrayList);
+        adapter = new RingsAdapter(getActivity(), notificationArrayList);
         recyclerView.setAdapter(adapter);
 
         return view;

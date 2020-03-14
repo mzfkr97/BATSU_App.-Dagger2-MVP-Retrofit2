@@ -1,13 +1,13 @@
-package com.roman.batsu.ui.note_frags;
+package com.roman.batsu.ui.rings;
 
 import java.io.Serializable;
 
-public class Notification implements Serializable {
+public class Rings implements Serializable {
 
     private String title;
     private String first_lesson;
 
-    public Notification(String title, String first_lesson) {
+    public Rings(String title, String first_lesson) {
         this.title = title;
         this.first_lesson = first_lesson;
     }
