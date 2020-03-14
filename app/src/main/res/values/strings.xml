@@ -1,17 +1,23 @@
 <resources>
     <string name="app_name">83 Группа</string>
+    <!--menu title -->
     <string name="title_home">Расписание</string>
     <string name="title_dashboard">Информация</string>
     <string name="title_notifications">Звонки</string>
-    <string name="image_link">https://icon-icons.com/icon/creative-creative-idea-idea-pencil-search-think/107047</string>
+    <!-- links use in application -->
+    <string name="logo_link">https://icon-icons.com/icon/creative-creative-idea-idea-pencil-search-think/107047</string>
+    <string name="fontawesome_link">https://fontawesome.com/icons?d=gallery</string>
 
-    <string name="no_internet_connection">Отсутствует подключение к сети</string>
+
     <string name="warning">Режим работы столовой:</string>
     <string name="description_header_notify">График работы столовой:\n07:30 – 19:00\nВыходной: суббота, воскресенье</string>
+    <!--icons fore  https://fontawesome.com/ -->
     <string name="fa_dot">\uf064</string>
     <string name="fa_comma">\uf0c6</string>
     <string name="fa_comma_dot">\uf111</string>
+
     <string name="share_popup">Поделиться</string>
+    <!--first start intro_dialog -->
     <string name="on_boarding_dialog_title">Добро пожаловать!</string>
     <string name="on_boarding_dialog_description">
          <![CDATA[
@@ -37,8 +43,8 @@
     <string name="shortcut_home">Расписание</string>
     <string name="shortcut_dashboard">Информация</string>
     <string name="shortcut_notification">Звонки</string>
-
-
+    <!--server response -->
+    <string name="no_internet_connection">Отсутствует подключение к сети</string>
     <string name="no_server_response">Нет ответа от сервера</string>
     <string name="checkYourURLConnection">Возможно у вас отсуствует соединение либо сервер не отвечает.\nПовторите попытку позже</string>
     <string name="refresh_data">Обновить</string>
