@@ -27,6 +27,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
     private int[] myDraw = {
             R.drawable.a_arrow,
+            R.drawable.a_work,
+            R.drawable.a_boo,
             R.drawable.a_books,
             R.drawable.a_calculator,
             R.drawable.a_hands,
@@ -35,8 +37,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             R.drawable.a_money,
             R.drawable.a_stock
     };
-
-
 
     DashboardAdapter(List<ResponseDashboard> dashboardList) {
         this.dashboardList = dashboardList;
@@ -65,11 +65,27 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
         holder.web_link.setText(dashboardList.get(position).getWeb_link());
         holder.time.setText(dashboardList.get(position).getTime());
-        Picasso.get().load(getRandom(myDraw)).into(holder.imageView);
 
+        String image_url = dashboardList.get(position).getImage_url();
+        setImageFromPicasso(holder, image_url);
     }
 
-    private static int getRandom(int[] array) {
+    private void setImageFromPicasso(DashboardAdapter.ViewHolder holder, String image_url){
+        if(image_url!=null && !image_url.isEmpty()){
+            Picasso.get()
+                    .load(image_url)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.a_arrow)
+                    .into(holder.imageView);
+        }else {
+            Picasso.get()
+                    .load(getRandomImageInArray(myDraw))
+                    .placeholder(R.drawable.placeholder)
+                    .into(holder.imageView);
+        }
+    }
+
+    private static int getRandomImageInArray(int[] array) {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
@@ -125,9 +141,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
          *  private static PopupItemClick onAutoItemClickListener;
          *
          * */
-
         void onClickPopup(ResponseDashboard item, View view);
-
     }
-
 }

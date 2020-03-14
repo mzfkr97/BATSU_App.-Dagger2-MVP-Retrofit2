@@ -162,8 +162,6 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         final String title = item.getTitle();
         final String description = item.getDescription();
 
-
-
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, title + "\n" + description );
