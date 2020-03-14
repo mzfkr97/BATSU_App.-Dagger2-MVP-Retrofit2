@@ -59,14 +59,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
         holder.title.setTextColor(myColor(color_hex));
         holder.description.setText(dashboardList.get(position).getDescription());
-
         if(web.isEmpty()){
             holder.web_link.setVisibility(View.GONE);
         }
+
         holder.web_link.setText(dashboardList.get(position).getWeb_link());
         holder.time.setText(dashboardList.get(position).getTime());
-
         Picasso.get().load(getRandom(myDraw)).into(holder.imageView);
+
     }
 
     private static int getRandom(int[] array) {
