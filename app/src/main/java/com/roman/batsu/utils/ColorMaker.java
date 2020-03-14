@@ -4,22 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 
-import com.roman.batsu.R;
-
 public class ColorMaker {
 
     private Context context;
 
-    private int[] myDraw = {
-            R.drawable.a_arrow,
-            R.drawable.a_books,
-            R.drawable.a_calculator,
-            R.drawable.a_hands,
-            R.drawable.a_hourglass,
-            R.drawable.a_landscape,
-            R.drawable.a_money,
-            R.drawable.a_stock
-    };
+
     public ColorMaker(Context context) {
         this.context = context;
     }

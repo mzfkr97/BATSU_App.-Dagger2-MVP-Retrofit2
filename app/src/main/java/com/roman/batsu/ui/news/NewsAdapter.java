@@ -32,8 +32,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             R.drawable.a_calculator,
             R.drawable.a_hands,
             R.drawable.a_hourglass,
-            R.drawable.a_landscape,
-            R.drawable.a_money,
             R.drawable.a_stock
     };
 

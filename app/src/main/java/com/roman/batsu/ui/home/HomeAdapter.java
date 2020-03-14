@@ -15,26 +15,47 @@ import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+
     private List<Home> responseList;
     private Context mContext;
 
-    public HomeAdapter( Context mContext, List<Home> responseList) {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView textDrop, title, dateText, textFirstLess, textSecondLesson, textThreeLesson, textFourLesson;
+        private TextView countFirstLesson, countSecondLesson,
+                countThreeLesson, countFourLesson;
+
+        MyViewHolder(@NonNull View view) {
+            super(view);
+            textDrop = view.findViewById(R.id.textDrop);
+            title = view.findViewById(R.id.title);
+            dateText = view.findViewById(R.id.dateText);
+            textFirstLess = view.findViewById(R.id.textFirstLess);
+            textSecondLesson = view.findViewById(R.id.textSecondLesson);
+            textThreeLesson = view.findViewById(R.id.textThreeLesson);
+            textFourLesson = view.findViewById(R.id.textFourLesson);
+            countFirstLesson = view.findViewById(R.id.countFirstLesson);
+            countSecondLesson = view.findViewById(R.id.countSecondLesson);
+            countThreeLesson = view.findViewById(R.id.countThreeLesson);
+            countFourLesson = view.findViewById(R.id.countFourLesson);
+        }
+    }
+
+    public HomeAdapter(Context mContext, List<Home> responseList) {
         this.mContext = mContext;
         this.responseList = responseList;
-
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_home, parent, false);
-        return new HomeAdapter.ViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
 
         holder.title.setText(responseList.get(position).getDay());
         holder.dateText.setText(responseList.get(position).getDate());
@@ -67,24 +88,4 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         return responseList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textDrop, title, dateText, textFirstLess, textSecondLesson, textThreeLesson, textFourLesson;
-        private TextView countFirstLesson, countSecondLesson,
-                countThreeLesson, countFourLesson;
-
-        ViewHolder(@NonNull View view) {
-            super(view);
-            textDrop = view.findViewById(R.id.textDrop);
-            title = view.findViewById(R.id.title);
-            dateText = view.findViewById(R.id.dateText);
-            textFirstLess = view.findViewById(R.id.textFirstLess);
-            textSecondLesson = view.findViewById(R.id.textSecondLesson);
-            textThreeLesson = view.findViewById(R.id.textThreeLesson);
-            textFourLesson = view.findViewById(R.id.textFourLesson);
-            countFirstLesson = view.findViewById(R.id.countFirstLesson);
-            countSecondLesson = view.findViewById(R.id.countSecondLesson);
-            countThreeLesson = view.findViewById(R.id.countThreeLesson);
-            countFourLesson = view.findViewById(R.id.countFourLesson);
-        }
-    }
 }

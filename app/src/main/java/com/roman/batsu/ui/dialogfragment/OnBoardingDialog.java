@@ -21,7 +21,7 @@ public class OnBoardingDialog extends DialogFragment implements View.OnClickList
 
     /**
      *  imageLogo.setOnClickListener(new View.OnClickListener() {
-     *             @Override
+     *
      *             public void onClick(View v) {
      *                 if (noConnection) {
      *                     showToast(getString(R.string.connection_error));
