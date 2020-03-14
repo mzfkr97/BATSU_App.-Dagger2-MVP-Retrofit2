@@ -22,6 +22,7 @@ public class ToolbarDataSetter {
 
 
     private String capitalizeData(String string){
+        //месяц с большой буквы
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 }
