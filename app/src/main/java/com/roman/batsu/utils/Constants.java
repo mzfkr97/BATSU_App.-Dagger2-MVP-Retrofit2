@@ -15,7 +15,9 @@ public class Constants {
     static final String FIRST_LESSON = "first_lesson";
     public static final String SECOND_LESSON = "second_lesson";
 
+    //pixabay url
 
+    private final static String PIXABAY_URL = "https://pixabay.com/api/" ;
 
 
 

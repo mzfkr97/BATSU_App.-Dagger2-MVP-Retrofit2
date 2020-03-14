@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
 import com.roman.batsu.ui.dashboard.ResponceDashboard.ResponseDashboard;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
@@ -21,6 +24,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     private List<ResponseDashboard> dashboardList;
 
     private static DashboardItemClick onClickPopup;
+
+    private int[] myDraw = {
+            R.drawable.a_arrow,
+            R.drawable.a_books,
+            R.drawable.a_calculator,
+            R.drawable.a_hands,
+            R.drawable.a_hourglass,
+            R.drawable.a_landscape,
+            R.drawable.a_money,
+            R.drawable.a_stock
+    };
+
+
 
     DashboardAdapter(List<ResponseDashboard> dashboardList) {
         this.dashboardList = dashboardList;
@@ -39,19 +55,23 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         String web = dashboardList.get(position).getWeb_link();
 
         int color_hex = dashboardList.get(position).getHex();
-
         holder.title.setText(dashboardList.get(position).getTitle());
+
         holder.title.setTextColor(myColor(color_hex));
-
         holder.description.setText(dashboardList.get(position).getDescription());
-
 
         if(web.isEmpty()){
             holder.web_link.setVisibility(View.GONE);
         }
-
         holder.web_link.setText(dashboardList.get(position).getWeb_link());
         holder.time.setText(dashboardList.get(position).getTime());
+
+        Picasso.get().load(getRandom(myDraw)).into(holder.imageView);
+    }
+
+    private static int getRandom(int[] array) {
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
     }
 
     private int myColor(int color){
@@ -72,10 +92,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
-        private TextView title, textShare,  description,web_link , time;
+        private TextView title, textShare,
+                description,web_link , time;
+        private ImageView imageView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageView = itemView.findViewById(R.id.imageView);
             title = itemView.findViewById(R.id.title);
             textShare = itemView.findViewById(R.id.textShare);
             description = itemView.findViewById(R.id.description);

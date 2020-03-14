@@ -43,6 +43,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
 
+
     public static DashboardFragment newInstance() {
         return new DashboardFragment();
     }
@@ -94,13 +95,12 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
+
     private void viewInit(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
         progressBar = view.findViewById(R.id.progressBar);
         cardNotification = view.findViewById(R.id.cardNotification);
         button_error = view.findViewById(R.id.button_error);
-
-
     }
 
     private void netWorkCheck() {
@@ -108,12 +108,18 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
             if (!NetworkChecker.isNetworkAvailable(getActivity())) {
                 cardNotification.setVisibility(View.VISIBLE);
                 swipeContainer.setRefreshing(false);
-
             }
         }
     }
 
     private void getNewsData() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
+            swipeContainer.setRefreshing(false);
+            progressBar.setVisibility(View.GONE);
+            return;
+
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
 
         ApiSchedule apiService = rxConnector.getScheduleApiInterface();
         Call<List<ResponseDashboard>> call = apiService.getResponseDashBoard("dashboard_information.json");
@@ -156,10 +162,7 @@ public class DashboardFragment extends Fragment implements DashboardAdapter.Dash
         final String title = item.getTitle();
         final String description = item.getDescription();
 
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-            return;
-        }
-        mLastClickTime = SystemClock.elapsedRealtime();
+
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);

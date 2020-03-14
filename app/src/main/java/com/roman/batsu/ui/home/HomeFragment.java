@@ -1,6 +1,7 @@
 package com.roman.batsu.ui.home;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
     private Button button_error;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
+    private long mLastClickTime = 0;
 
     static HomeFragment newInstance(int sectionNumber) {
         HomeFragment fragment = new HomeFragment();
@@ -137,6 +139,14 @@ public class HomeFragment extends Fragment {
 
 
     private void getNewsData(String fileName) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
+            swipeContainer.setRefreshing(false);
+            progressBar.setVisibility(View.GONE);
+            return;
+
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         ApiSchedule apiService = rxConnector.getScheduleApiInterface();
         Call<List<InputResult>> call = apiService.getSchedule(fileName);
         call.enqueue(new Callback<List<InputResult>> () {

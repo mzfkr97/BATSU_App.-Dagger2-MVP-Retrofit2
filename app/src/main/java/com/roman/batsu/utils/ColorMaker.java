@@ -1,19 +1,28 @@
 package com.roman.batsu.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
+
+import com.roman.batsu.R;
 
 public class ColorMaker {
 
     private Context context;
 
+    private int[] myDraw = {
+            R.drawable.a_arrow,
+            R.drawable.a_books,
+            R.drawable.a_calculator,
+            R.drawable.a_hands,
+            R.drawable.a_hourglass,
+            R.drawable.a_landscape,
+            R.drawable.a_money,
+            R.drawable.a_stock
+    };
     public ColorMaker(Context context) {
         this.context = context;
     }
-
 
     /*
      возвращает случайный цвет из массива
@@ -34,29 +43,8 @@ public class ColorMaker {
     }
 
 
-    /*
-    определяем ночную тему
-    */
-    public boolean nightMode() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String themeName = sharedPreferences.getString(Constants.THEME, Constants.THEME_LIGHT);
-        boolean nightTheme = false;
-        if (themeName.equals(Constants.THEME_DARK)) {
-            nightTheme = true;
-        }
-        return nightTheme;
-    }
 
-    /*
-    возвращает цвет в зависимости от установленной темы
-     - ночь или день
-    */
-//    public int getNightModeColor(){
-//        int  color = ContextCompat.getColor(context, R.color.colorPrimary);
-//        if (nightMode()){
-//            color = ContextCompat.getColor(context, R.color.colorPrimaryDark_night);
-//        }
-//        return color;
-//    }
+
+
 
 }
