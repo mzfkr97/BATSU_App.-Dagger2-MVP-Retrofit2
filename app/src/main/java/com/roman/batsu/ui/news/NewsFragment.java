@@ -108,17 +108,9 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
             swipeContainer.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
             return;
-
         }
         newsPresenter.requestDataFromServer();
         mLastClickTime = SystemClock.elapsedRealtime();
-
-    }
-
-    private void onError(){
-        progressBar.setVisibility(View.GONE);
-        cardNotification.setVisibility(View.VISIBLE);
-        swipeContainer.setRefreshing(false);
     }
 
 
@@ -163,7 +155,9 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
 
     @Override
     public void onResponseFailure(Throwable throwable) {
-        onError();
+        progressBar.setVisibility(View.GONE);
+        cardNotification.setVisibility(View.VISIBLE);
+        swipeContainer.setRefreshing(false);
     }
 
     @Override

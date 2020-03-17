@@ -37,7 +37,6 @@ public class RXConnector {
         return retrofit;
     }
 
-
     private OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
