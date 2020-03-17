@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.news;
+package com.roman.batsu.ui.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,6 +1,6 @@
 package com.roman.batsu.ui.home;
 
-import com.roman.batsu.ui.home.pojo.Home;
+import com.roman.batsu.ui.model.Home;
 
 import java.util.List;
 

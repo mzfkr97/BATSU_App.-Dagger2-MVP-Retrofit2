@@ -1,7 +1,7 @@
 package com.roman.batsu.utils.api;
 
-import com.roman.batsu.ui.news.News;
-import com.roman.batsu.ui.home.pojo.Home;
+import com.roman.batsu.ui.model.News;
+import com.roman.batsu.ui.model.Home;
 
 import java.util.List;
 

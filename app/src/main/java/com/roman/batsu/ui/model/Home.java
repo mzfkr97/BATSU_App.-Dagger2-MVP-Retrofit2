@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.home.pojo;
+package com.roman.batsu.ui.model;
 
 import java.util.List;
 

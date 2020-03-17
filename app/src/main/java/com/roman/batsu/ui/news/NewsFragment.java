@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
+import com.roman.batsu.ui.model.News;
 import com.roman.batsu.utils.Constants;
 import com.roman.batsu.utils.api.ApiClient;
 import com.roman.batsu.utils.application.MyApplication;

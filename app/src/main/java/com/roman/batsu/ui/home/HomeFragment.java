@@ -18,7 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
 import com.roman.batsu.ui.home.adapter.HomeAdapter;
-import com.roman.batsu.ui.home.pojo.Home;
+import com.roman.batsu.ui.model.Home;
 import com.roman.batsu.utils.network.NetworkChecker;
 
 import java.util.ArrayList;
@@ -54,12 +54,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         initUI(view);
         //Initializing presenter
         movieListPresenter = new HomePresenter(this);
-        movieListPresenter.requestDataFromServer(getFileName());
+        getNewsData(getFileName());
 
 
         swipeContainer.setOnRefreshListener(() -> {
             progressBar.setVisibility(View.VISIBLE);
-            movieListPresenter.requestDataFromServer(getFileName());
+            getNewsData(getFileName());
             netWorkCheck();
         });
 
@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         button_error.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             netWorkCheck();
-            movieListPresenter.requestDataFromServer(getFileName());
+
 
 
         });
@@ -146,6 +146,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             return;
 
         }
+        movieListPresenter.requestDataFromServer(fileName);
         mLastClickTime = SystemClock.elapsedRealtime();
 
     }

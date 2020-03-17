@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.roman.batsu.ui.home.pojo.Home;
+import com.roman.batsu.ui.model.Home;
 import com.roman.batsu.utils.api.ApiClient;
 import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.RXConnector;
