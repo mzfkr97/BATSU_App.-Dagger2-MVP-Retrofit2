@@ -1,7 +1,7 @@
 package com.roman.batsu.utils.api;
 
 import com.roman.batsu.ui.news.News;
-import com.roman.batsu.ui.home.Home;
+import com.roman.batsu.ui.home.pojo.Home;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface ApiSchedule {
+public interface ApiClient {
 
     /**
      * { http://mir-dverei.by/image/schedule_82.json }

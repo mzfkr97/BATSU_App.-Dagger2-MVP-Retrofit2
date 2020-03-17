@@ -17,22 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
-import com.roman.batsu.utils.api.ApiSchedule;
-import com.roman.batsu.utils.application.MyApplication;
+import com.roman.batsu.ui.home.adapter.HomeAdapter;
+import com.roman.batsu.ui.home.pojo.Home;
 import com.roman.batsu.utils.network.NetworkChecker;
-import com.roman.batsu.utils.network.RXConnector;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeContract.View {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private RXConnector rxConnector;
+
     private ArrayList<Home> articlesList = new ArrayList<>();
     private HomeAdapter adapter;
     private RecyclerView recyclerView;
@@ -41,6 +36,11 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
     private long mLastClickTime = 0;
+    private HomePresenter movieListPresenter;
+    private boolean loading = true;
+    private int visibleThreshold = 5;
+    int firstVisibleItem, visibleItemCount, totalItemCount;
+    private List<Home> moviesList;
 
     static HomeFragment newInstance(int sectionNumber) {
         HomeFragment fragment = new HomeFragment();
@@ -55,12 +55,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
-        viewInit(view);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        initUI(view);
+        //Initializing presenter
+        movieListPresenter = new HomePresenter(this);
+        movieListPresenter.requestDataFromServer(getFileName());
 
-        rxConnector =  MyApplication.getComponent().getRxConnector();
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
@@ -82,10 +82,25 @@ public class HomeFragment extends Fragment {
         button_error.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             netWorkCheck();
-            getNewsData(getFileName());
+            movieListPresenter.requestDataFromServer(getFileName());
+           // getNewsData(getFileName());
 
         });
         return view;
+    }
+
+    private void initUI(View view) {
+        moviesList = new ArrayList<>();
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new HomeAdapter(getActivity(), moviesList);
+        recyclerView.setAdapter(adapter);
+
+        progressBar = view.findViewById(R.id.progressBar);
+        cardNotification = view.findViewById(R.id.cardNotification);
+        button_error = view.findViewById(R.id.button_error);
     }
 
 
@@ -128,13 +143,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void viewInit(View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        progressBar = view.findViewById(R.id.progressBar);
-        cardNotification = view.findViewById(R.id.cardNotification);
-        button_error = view.findViewById(R.id.button_error);
-
-    }
 
 
     private void getNewsData(String fileName) {
@@ -145,33 +153,6 @@ public class HomeFragment extends Fragment {
 
         }
         mLastClickTime = SystemClock.elapsedRealtime();
-
-        ApiSchedule apiService = rxConnector.getScheduleApiInterface();
-        Call<List<Home>> call = apiService.getSchedule(fileName);
-        call.enqueue(new Callback<List<Home>> () {
-            @Override
-            public void onResponse(@NonNull Call<List<Home>>  call, @NonNull Response<List<Home>>  response) {
-
-                if( response.body() != null){
-                    List<Home> jsonArray = response.body();
-                    adapter = new HomeAdapter(getActivity(), jsonArray);
-                    recyclerView.setAdapter(adapter);
-                    cardNotification.setVisibility(View.GONE);
-                    swipeContainer.setRefreshing(false);
-                    progressBar.setVisibility(View.GONE);
-                }else {
-                    onError();
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Home>> call, @NonNull Throwable t) {
-                onError();
-            }
-
-        });
-
 
     }
 
@@ -184,5 +165,32 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        movieListPresenter.onDestroy();
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        cardNotification.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        cardNotification.setVisibility(View.GONE);
+        swipeContainer.setRefreshing(false);
+    }
+
+    @Override
+    public void setDataToRecyclerView(List<Home> movieArrayList) {
+        moviesList.clear();
+        moviesList.addAll(movieArrayList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        onError();
+        Log.d("TAG", "onResponseFailure: ");
     }
 }

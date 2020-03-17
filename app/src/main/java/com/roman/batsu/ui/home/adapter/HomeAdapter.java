@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.home;
+package com.roman.batsu.ui.home.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
+import com.roman.batsu.ui.home.pojo.Home;
 import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
     private List<Home> responseList;
     private Context mContext;
+
+    public HomeAdapter(Context mContext, List<Home> responseList) {
+        this.mContext = mContext;
+        this.responseList = responseList;
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView textDrop, title, dateText, textFirstLess, textSecondLesson, textThreeLesson, textFourLesson;
@@ -41,10 +48,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         }
     }
 
-    public HomeAdapter(Context mContext, List<Home> responseList) {
-        this.mContext = mContext;
-        this.responseList = responseList;
-    }
 
     @NonNull
     @Override

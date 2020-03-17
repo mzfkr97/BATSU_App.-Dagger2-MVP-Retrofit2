@@ -19,7 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
 import com.roman.batsu.utils.Constants;
-import com.roman.batsu.utils.api.ApiSchedule;
+import com.roman.batsu.utils.api.ApiClient;
 import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.NetworkChecker;
 import com.roman.batsu.utils.network.RXConnector;
@@ -120,7 +120,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         }
         mLastClickTime = SystemClock.elapsedRealtime();
 
-        ApiSchedule apiService = rxConnector.getScheduleApiInterface();
+        ApiClient apiService = rxConnector.getScheduleApiInterface();
         Call<List<News>> call = apiService.getResponseDashBoard("dashboard_information.json");
         call.enqueue(new Callback<List<News>>() {
             @Override

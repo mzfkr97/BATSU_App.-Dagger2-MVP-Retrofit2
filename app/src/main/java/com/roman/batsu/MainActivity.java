@@ -30,15 +30,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final String TAB_1 = "com.roman.batsu.ACTION_HOME";
     private static final String TAB_2 = "com.roman.batsu.ACTION_DASHBOARD";
     private static final String TAB_3 = "com.roman.batsu.ACTION_NOTIFICATION";
+
     private static final String PREFS_NAME = "firstStartRun";
     private final String[] toolbarTitle = {
             "Расписание",
             "Информация",
             "Звонки"
     };
+
     private final Fragment fragment1 = ViewPagerHome.newInstance();
     private final Fragment fragment2 = NewsFragment.newInstance();
     private final Fragment fragment3 = RingsFragment.newInstance();
+
     private final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
     private LoaderFragment loaderFragment;

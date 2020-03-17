@@ -3,7 +3,7 @@ package com.roman.batsu.utils.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.roman.batsu.utils.api.ApiSchedule;
+import com.roman.batsu.utils.api.ApiClient;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,12 +15,14 @@ public class RXConnector {
 
     private Retrofit retrofit = null;
     private static final String MAIN_URL = "http://mir-dverei.by/";
-
-
     /**
-     * get XML RetrofitClient xml приходит в некоторых ответах , в частности в поездах
+     *
+     * get XML RetrofitClient xml
+     * приходит в
+     * некоторых ответах,
+     * в частности
+     * в поездах
      */
-
 
     private Retrofit getRetrofitClient() {
         Gson gson = new GsonBuilder()
@@ -43,9 +45,9 @@ public class RXConnector {
 
 
     /* Расписание и новости*/
-    public ApiSchedule getScheduleApiInterface() {
+    public ApiClient getScheduleApiInterface() {
         return getRetrofitClient()
-                .create(ApiSchedule.class);
+                .create(ApiClient.class);
     }
 
 
