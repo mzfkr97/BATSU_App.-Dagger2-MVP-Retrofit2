@@ -11,14 +11,14 @@ import retrofit2.http.Path;
 
 public interface ApiClient {
 
-    /**
+    /*
      * { http://mir-dverei.by/image/schedule_82.json }
      */
 
     @GET("image/{fileName}")
     Call <List<Home>> getSchedule(@Path("fileName") String fileName);
 
-    /**
+    /*
      * { http://mir-dverei.by/image/dashboard_information.json }
      */
 
