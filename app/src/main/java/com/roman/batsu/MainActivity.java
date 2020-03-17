@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //dagger2
         loaderFragment = MyApplication.getComponent().getLoaderFragment();
+        boolean noConnection = !NetworkChecker.isNetworkAvailable(this);
 
         bottomNavigationView = findViewById(R.id.navigation);
-        boolean noConnection = !NetworkChecker.isNetworkAvailable(this);
+
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         TextView toolbar_subTitle = toolbar.findViewById(R.id.toolbar_subTitle);
