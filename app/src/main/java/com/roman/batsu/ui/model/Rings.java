@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.rings;
+package com.roman.batsu.ui.model;
 
 import java.io.Serializable;
 

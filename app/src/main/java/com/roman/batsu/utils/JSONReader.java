@@ -1,6 +1,6 @@
 package com.roman.batsu.utils;
 
-import com.roman.batsu.ui.rings.Rings;
+import com.roman.batsu.ui.model.Rings;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
+import com.roman.batsu.ui.model.Rings;
 import com.roman.batsu.utils.JSONReader;
 
 import java.io.InputStream;
@@ -26,7 +27,6 @@ public class RingsFragment extends Fragment  {
     private List<Rings> notificationArrayList = new ArrayList<>();
 
     private JSONReader jsonReader= new JSONReader();
-    private InputStream inputStream;
 
     public static RingsFragment newInstance() {
         return new RingsFragment();
@@ -42,7 +42,7 @@ public class RingsFragment extends Fragment  {
         TextView description_header = view.findViewById(R.id.description_header) ;
         description_header.setText(getString(R.string.description_header_notify));
 
-        inputStream = getResources().openRawResource(R.raw.ring_lessons);
+        InputStream inputStream = getResources().openRawResource(R.raw.ring_lessons);
         notificationArrayList = jsonReader.createListFromJson(inputStream);
         adapter = new RingsAdapter(getActivity(), notificationArrayList);
         recyclerView.setAdapter(adapter);

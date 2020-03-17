@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
+import com.roman.batsu.ui.model.Rings;
 import com.roman.batsu.utils.ColorMaker;
 
 import java.util.List;
