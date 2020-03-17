@@ -20,7 +20,6 @@ public class HomePresenter implements HomeContract.Presenter, HomeContract.Model
     private HomeContract.View fragmentView;
     private HomeContract.Model movieListModel;
 
-
     /**
      * Подаем ему вью и модель
      */

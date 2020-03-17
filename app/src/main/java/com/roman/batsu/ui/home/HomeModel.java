@@ -36,14 +36,12 @@ public class HomeModel implements HomeContract.Model {
     public void getMovieList(OnFinishedListener onFinishedListener, String fileName) {
         RXConnector rxConnector = MyApplication.getComponent().getRxConnector();
         ApiClient apiService = rxConnector.getScheduleApiInterface();
-
         retrofit2.Call<List<Home>> call = apiService.getSchedule(fileName);
         call.enqueue(new Callback<List<Home>>() {
             @Override
             public void onResponse(@NonNull retrofit2.Call<List<Home>> call, @NonNull Response<List<Home>> response) {
                     List<Home> jsonArray = response.body();
                     onFinishedListener.onFinished(jsonArray);
-
             }
 
             @Override

@@ -137,8 +137,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
 
-
-
     private void getNewsData(String fileName) {
         if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
             swipeContainer.setRefreshing(false);

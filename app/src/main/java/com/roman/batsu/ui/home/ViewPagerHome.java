@@ -42,8 +42,6 @@ public class ViewPagerHome extends Fragment {
 
     }
 
-
-
     class ViewPager extends FragmentPagerAdapter {
         private int mNumOfTabs;
 

@@ -19,7 +19,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class OnBoardingDialog extends DialogFragment implements View.OnClickListener {
 
-    /**
+    /*
      *  imageLogo.setOnClickListener(new View.OnClickListener() {
      *
      *             public void onClick(View v) {
@@ -38,8 +38,6 @@ public class OnBoardingDialog extends DialogFragment implements View.OnClickList
      *             }
      *         });*/
 
-    private Button letsGoButton;
-    private TextView text_title, text_description;
     private static final String PREFS_NAME = "firstStartRun";
     private SharedPreferences settings;
 
@@ -56,9 +54,9 @@ public class OnBoardingDialog extends DialogFragment implements View.OnClickList
         View v = inflater.inflate(R.layout.onboarding_dialog, null);
         builder.setView(v);
         settings = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        text_title = v.findViewById(R.id.text_title);
-        text_description = v.findViewById(R.id.text_description);
-        letsGoButton = v.findViewById(R.id.letsGoButton);
+        TextView text_title = v.findViewById(R.id.text_title);
+        TextView text_description = v.findViewById(R.id.text_description);
+        Button letsGoButton = v.findViewById(R.id.letsGoButton);
         text_title.setText(getString(R.string.on_boarding_dialog_title));
         TextUtils.setTextWithLinks(text_description, TextUtils.fromHtml(getString(R.string.on_boarding_dialog_description)));
         letsGoButton.setOnClickListener(this);
