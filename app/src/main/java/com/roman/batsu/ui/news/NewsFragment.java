@@ -22,7 +22,6 @@ import com.roman.batsu.ui.model.News;
 import com.roman.batsu.ui.news.adapter.NewsAdapter;
 import com.roman.batsu.utils.Constants;
 import com.roman.batsu.utils.network.NetworkChecker;
-import com.roman.batsu.utils.network.RXConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ import java.util.List;
 public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemClick, NewsContract.View {
 
     private RecyclerView recyclerView;
-    private RXConnector rxConnector;
     private List<News> dashboardList = new ArrayList<>();
     private long mLastClickTime = 0;
     private CardView cardNotification;
@@ -54,13 +52,10 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         setUpRecyclerView(view);
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                progressBar.setVisibility(View.VISIBLE);
-                getNewsData();
-                netWorkCheck();
-            }
+        swipeContainer.setOnRefreshListener(() -> {
+            progressBar.setVisibility(View.VISIBLE);
+            getNewsData();
+            netWorkCheck();
         });
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
