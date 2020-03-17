@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private ArrayList<Home> articlesList = new ArrayList<>();
     private HomeAdapter adapter;
     private RecyclerView recyclerView;
     private CardView cardNotification;
@@ -37,9 +36,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private SwipeRefreshLayout swipeContainer;
     private long mLastClickTime = 0;
     private HomePresenter movieListPresenter;
-    private boolean loading = true;
-    private int visibleThreshold = 5;
-    int firstVisibleItem, visibleItemCount, totalItemCount;
     private List<Home> moviesList;
 
     static HomeFragment newInstance(int sectionNumber) {
@@ -49,7 +45,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         fragment.setArguments(args);
         return fragment;
     }
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,28 +57,22 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         movieListPresenter.requestDataFromServer(getFileName());
 
 
-        swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
             progressBar.setVisibility(View.VISIBLE);
-            getNewsData(getFileName());
+            movieListPresenter.requestDataFromServer(getFileName());
             netWorkCheck();
         });
 
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
 
         progressBar.setVisibility(View.VISIBLE);
         netWorkCheck();
-        getNewsData(getFileName());
 
         button_error.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             netWorkCheck();
             movieListPresenter.requestDataFromServer(getFileName());
-           // getNewsData(getFileName());
+
 
         });
         return view;
@@ -97,6 +86,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new HomeAdapter(getActivity(), moviesList);
         recyclerView.setAdapter(adapter);
+
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         progressBar = view.findViewById(R.id.progressBar);
         cardNotification = view.findViewById(R.id.cardNotification);
@@ -137,7 +132,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             if (!NetworkChecker.isNetworkAvailable(getActivity())) {
                 cardNotification.setVisibility(View.VISIBLE);
                 swipeContainer.setRefreshing(false);
-
             }
         }
     }
