@@ -116,7 +116,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     fileName = "schedule_84.json";
                     break;
                     default:
-
             }
         }catch (Exception e){
             Log.d("TAG", "getMyInputStream: " + e);
