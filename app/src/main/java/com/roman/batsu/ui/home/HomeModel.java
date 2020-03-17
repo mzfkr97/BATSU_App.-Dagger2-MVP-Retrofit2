@@ -42,19 +42,15 @@ public class HomeModel implements HomeContract.Model {
         call.enqueue(new Callback<List<Home>>() {
             @Override
             public void onResponse(@NonNull retrofit2.Call<List<Home>> call, @NonNull Response<List<Home>> response) {
-
-
-                if( response.body() != null){
                     List<Home> jsonArray = response.body();
                     onFinishedListener.onFinished(jsonArray);
-                }else {
-                }
+
             }
 
             @Override
-            public void onFailure(@NonNull retrofit2.Call<List<Home>> call, @NonNull Throwable t) {
-                Log.e(TAG, t.toString());
-                onFinishedListener.onFailure(t);
+            public void onFailure(@NonNull retrofit2.Call<List<Home>> call, @NonNull Throwable throwable) {
+                Log.e(TAG, throwable.toString());
+                onFinishedListener.onFailure(throwable);
             }
         });
     }

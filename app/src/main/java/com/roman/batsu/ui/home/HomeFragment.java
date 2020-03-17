@@ -162,6 +162,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         movieListPresenter.onDestroy();
     }
 
+
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
