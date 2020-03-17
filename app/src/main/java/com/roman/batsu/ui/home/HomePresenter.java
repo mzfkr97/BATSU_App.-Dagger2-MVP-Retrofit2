@@ -21,10 +21,12 @@ public class HomePresenter implements HomeContract.Presenter, HomeContract.Model
     private HomeContract.Model movieListModel;
 
 
-/** Подаем ему вью и модель*/
+    /**
+     * Подаем ему вью и модель
+     */
     //Обрати внимание на аргументы конструктора -
     // мы передаем экземпляр Activity Fragments, а Repository просто создаём конструктором.
-    public HomePresenter(HomeContract.View fragmentView) {
+    HomePresenter(HomeContract.View fragmentView) {
         this.fragmentView = fragmentView;
         this.movieListModel = new HomeModel();
     }

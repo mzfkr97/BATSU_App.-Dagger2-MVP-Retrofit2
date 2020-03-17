@@ -5,7 +5,6 @@ import com.roman.batsu.ui.home.pojo.Home;
 import java.util.List;
 
 public interface HomeContract {
-
     //то что происходит в активити / fragments
     interface View {
         void showProgress();
@@ -20,16 +19,12 @@ public interface HomeContract {
         void requestDataFromServer(String filename);
     }
 
-
-
     interface Model {
         interface OnFinishedListener {
             void onFinished(List<Home> homeList);
             void onFailure(Throwable t);
         }
-
         void getMovieList(OnFinishedListener onFinishedListener, String fileName);
-
     }
 
 }
