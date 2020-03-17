@@ -19,20 +19,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
 import com.roman.batsu.ui.model.News;
+import com.roman.batsu.ui.news.adapter.NewsAdapter;
 import com.roman.batsu.utils.Constants;
-import com.roman.batsu.utils.api.ApiClient;
-import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.NetworkChecker;
 import com.roman.batsu.utils.network.RXConnector;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemClick {
+public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemClick, NewsContract.View {
 
     private RecyclerView recyclerView;
     private RXConnector rxConnector;
@@ -42,6 +37,8 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
     private Button button_error;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeContainer;
+    private NewsPresenter newsPresenter;
+    private NewsAdapter adapter;
 
 
     public static NewsFragment newInstance() {
@@ -51,10 +48,11 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
+        newsPresenter = new NewsPresenter(this);
+
         viewInit(view);
         setUpRecyclerView(view);
 
-        rxConnector =  MyApplication.getComponent().getRxConnector();
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,22 +67,15 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-        //inputStream = getResources().openRawResource(R.raw.dashboard_information);
-
-       // dashboardList = jsonReader.createListFromJsonDashboard(inputStream);
         progressBar.setVisibility(View.VISIBLE);
         netWorkCheck();
         getNewsData();
 
-        button_error.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                netWorkCheck();
-                getNewsData();
+        button_error.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            netWorkCheck();
+            getNewsData();
 
-            }
         });
 
         return view;
@@ -119,27 +110,9 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
             return;
 
         }
+        newsPresenter.requestDataFromServer();
         mLastClickTime = SystemClock.elapsedRealtime();
 
-        ApiClient apiService = rxConnector.getScheduleApiInterface();
-        Call<List<News>> call = apiService.getResponseDashBoard("dashboard_information.json");
-        call.enqueue(new Callback<List<News>>() {
-            @Override
-            public void onResponse(Call<List<News>>  call, Response<List<News>> response) {
-                if( response.body() != null){
-                    dashboardList = response.body();
-                    createListData(dashboardList);
-                } else {
-                    onError();
-                    Log.d("TAG", "onFailure: " + response.message());
-                }
-            }
-            @Override
-            public void onFailure(Call<List<News>> call, Throwable t) {
-                Log.d("TAG", "onFailure: " + t.getMessage());
-                onError();
-            }
-        });
     }
 
     private void onError(){
@@ -148,14 +121,6 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         swipeContainer.setRefreshing(false);
     }
 
-    private void createListData(List<News> listData) {
-        NewsAdapter adapter = new NewsAdapter(listData);
-        recyclerView.setAdapter(adapter);
-        cardNotification.setVisibility(View.GONE);
-        swipeContainer.setRefreshing(false);
-        progressBar.setVisibility(View.GONE);
-        adapter.setAutoOnItemClickListener(this);
-    }
 
     @Override
     public void onClickPopup(News item, View view) {
@@ -171,5 +136,39 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         } catch (android.content.ActivityNotFoundException ex) {
             Log.d(Constants.TAG, "ActivityNotFoundException" + ex);
         }
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        cardNotification.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        cardNotification.setVisibility(View.GONE);
+        swipeContainer.setRefreshing(false);
+    }
+
+    @Override
+    public void setDataToRecyclerView(List<News> movieArrayList) {
+        dashboardList.clear();
+        dashboardList.addAll(movieArrayList);
+        adapter = new NewsAdapter(dashboardList);
+        recyclerView.setAdapter(adapter);
+        adapter.setAutoOnItemClickListener(this);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        onError();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        newsPresenter.onDestroy();
     }
 }

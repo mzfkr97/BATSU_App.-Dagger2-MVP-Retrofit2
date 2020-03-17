@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.news;
+package com.roman.batsu.ui.news.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -36,7 +36,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             R.drawable.a_stock
     };
 
-    NewsAdapter(List<News> dashboardList) {
+    public NewsAdapter(List<News> dashboardList) {
         this.dashboardList = dashboardList;
     }
 
@@ -130,11 +130,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
     }
 
-    void setAutoOnItemClickListener(DashboardItemClick popupItemClick) {
+    public void setAutoOnItemClickListener(DashboardItemClick popupItemClick) {
         NewsAdapter.onClickPopup = popupItemClick;
     }
 
-    interface DashboardItemClick {
+    public interface DashboardItemClick {
         /** клик в авто фрагменте
          *  private static PopupItemClick onAutoItemClickListener;
          *

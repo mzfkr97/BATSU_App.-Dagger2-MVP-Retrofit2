@@ -25,17 +25,16 @@ public class HomeModel implements HomeContract.Model {
     // Этот класс будет реализовывать интерфейс модели из интерфейса контракта, указанного выше.
 
     private final String TAG = "MovieListModel";
-    private RXConnector rxConnector;
 
     /**
-     Эта функция будет извлекать данные фильмов
+     Эта функция будет извлекать данные файлов
      * @param onFinishedListener
      * @param fileName: Имя файла.
      */
 
     @Override
     public void getMovieList(OnFinishedListener onFinishedListener, String fileName) {
-        rxConnector =  MyApplication.getComponent().getRxConnector();
+        RXConnector rxConnector = MyApplication.getComponent().getRxConnector();
         ApiClient apiService = rxConnector.getScheduleApiInterface();
 
         retrofit2.Call<List<Home>> call = apiService.getSchedule(fileName);

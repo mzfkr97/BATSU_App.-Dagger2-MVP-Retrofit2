@@ -25,6 +25,6 @@ public interface NewsContract {
             void onFinished(List<News> newsList);
             void onFailure(Throwable t);
         }
-        void getMovieList(OnFinishedListener onFinishedListener, String fileName);
+        void getMovieList(OnFinishedListener onFinishedListener);
     }
 }
