@@ -13,12 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.roman.batsu.ui.news.NewsFragment;
 import com.roman.batsu.ui.dialogfragment.OnBoardingDialog;
 import com.roman.batsu.ui.home.ViewPagerHome;
+import com.roman.batsu.ui.news.PagerNews;
 import com.roman.batsu.ui.rings.RingsFragment;
 import com.roman.batsu.utils.BottomNavigationViewHelper;
 import com.roman.batsu.utils.LoaderFragment;
+import com.roman.batsu.utils.ToolbarDataSet;
 import com.roman.batsu.utils.ToolbarDataSetter;
 import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.NetworkChecker;
@@ -39,22 +40,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     };
 
     private final Fragment fragment1 = ViewPagerHome.newInstance();
-    private final Fragment fragment2 = NewsFragment.newInstance();
+    private final Fragment fragment2 = PagerNews.newInstance();
     private final Fragment fragment3 = RingsFragment.newInstance();
 
     private final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
     private LoaderFragment loaderFragment;
+
     private Toolbar toolbar;
     private TextView toolbar_title;
     private Fragment active = fragment1;
+
     private boolean isOpenShortCutsIntent = false;
+    private ToolbarDataSet setToolbarData;
+
+    void setData(ToolbarDataSet setToolbarData) {
+        this.setToolbarData = setToolbarData;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         loaderFragment = MyApplication.getComponent().getLoaderFragment();
         boolean noConnection = !NetworkChecker.isNetworkAvailable(this);
 
@@ -62,13 +69,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+
         TextView toolbar_subTitle = toolbar.findViewById(R.id.toolbar_subTitle);
 
         fragmentManager.beginTransaction().add(R.id.container, fragment3, "3").hide(fragment3).commit();
         fragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
         fragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
-        toolbar_subTitle.setText(new ToolbarDataSetter().setDataInToolbar());
+        setData(new ToolbarDataSetter());
+
+        toolbar_subTitle.setText(setToolbarData.setData());
+
         toolBarSetUp();
         if (savedInstanceState == null) {
             toolbar_title.setText(toolbarTitle[0]);
@@ -81,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getShortCutsIntents();
         doFirstRun();
     }
+
 
     private void doFirstRun() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -96,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             toolbar.setTitleTextAppearance(this, R.style.RobotoBoldTextAppearance);
+            toolbar_title.setText(toolbarTitle[0]);
         }
 
     }

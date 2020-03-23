@@ -6,6 +6,11 @@
         <item>84 Группа</item>
     </array>
 
+    <array name="news_name">
+        <item>Группа</item>
+        <item>Университет</item>
+    </array>
+
     <array name="mdcolor_400">
         <item name="red_400" type="color">#FABFBB</item>
         <item name="pink_400" type="color">#F87DA7</item>

@@ -16,14 +16,14 @@ public interface ApiClient {
      */
 
     @GET("image/{fileName}")
-    Call <List<Home>> getSchedule(@Path("fileName") String fileName);
+    Call<List<Home>> getSchedule(@Path("fileName") String fileName);
 
     /*
      * { http://mir-dverei.by/image/dashboard_information.json }
      */
 
     @GET("image/{fileName}")
-    Call <List<News>> getResponseDashBoard(@Path("fileName") String fileName);
+    Call<List<News>> getResponseDashBoard(@Path("fileName") String fileName);
 
 
 }

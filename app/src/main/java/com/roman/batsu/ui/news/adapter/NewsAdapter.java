@@ -125,7 +125,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public void onClick(View view) {
             if (NewsAdapter.onClickPopup != null) {
                 NewsAdapter.onClickPopup
-                        .onClickPopup(dashboardList.get(getAdapterPosition()), view);
+                        .onClickPopup(dashboardList.get(getAdapterPosition()));
             }
         }
     }
@@ -135,10 +135,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     public interface DashboardItemClick {
-        /** клик в авто фрагменте
+        /* клик в авто фрагменте
          *  private static PopupItemClick onAutoItemClickListener;
          *
          * */
-        void onClickPopup(News item, View view);
+        void onClickPopup(News item);
     }
 }

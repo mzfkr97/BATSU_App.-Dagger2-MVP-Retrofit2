@@ -1,23 +1,28 @@
 package com.roman.batsu.ui.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Rings implements Serializable {
 
+    //super class
+    @SerializedName("title")
     private String title;
-    private String first_lesson;
 
-    public Rings(String title, String first_lesson) {
+    @SerializedName("description")
+    private String description;
+
+    public Rings(String title, String description) {
         this.title = title;
-        this.first_lesson = first_lesson;
+        this.description = description;
     }
-
 
     public String getTitle() {
         return title;
     }
 
-    public String getFirst_lesson() {
-        return first_lesson;
+    public String getDescription() {
+        return description;
     }
 }

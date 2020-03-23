@@ -37,7 +37,7 @@ public class RingsAdapter extends RecyclerView.Adapter<RingsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RingsAdapter.ViewHolder holder, int position) {
         holder.title.setText(notificationList.get(position).getTitle());
-        holder.first_lesson.setText(notificationList.get(position).getFirst_lesson());
+        holder.first_lesson.setText(notificationList.get(position).getDescription());
         holder.textDrop.setBackgroundColor(new ColorMaker(mContext).getRandomMaterialColor("400"));
     }
 

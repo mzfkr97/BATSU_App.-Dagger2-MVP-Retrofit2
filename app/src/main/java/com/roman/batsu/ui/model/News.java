@@ -2,16 +2,7 @@ package com.roman.batsu.ui.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class News implements Serializable {
-
-
-    @SerializedName("title")
-    private String title;
-
-    @SerializedName("description")
-    private String description;
+public class News extends Rings {
 
 
     @SerializedName("time")
@@ -26,13 +17,8 @@ public class News implements Serializable {
     @SerializedName("hex")
     private int hex;
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
+    public News(String title, String description) {
+        super(title, description);
     }
 
 

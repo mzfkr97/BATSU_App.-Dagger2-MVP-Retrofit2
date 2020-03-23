@@ -26,7 +26,7 @@ public class RingsFragment extends Fragment  {
     private RingsAdapter adapter;
     private List<Rings> notificationArrayList = new ArrayList<>();
 
-    private JSONReader jsonReader= new JSONReader();
+    private JSONReader jsonReader = new JSONReader();
 
     public static RingsFragment newInstance() {
         return new RingsFragment();
@@ -38,23 +38,21 @@ public class RingsFragment extends Fragment  {
 
         setUpRecyclerView(view);
         notificationArrayList.clear();
-
         TextView description_header = view.findViewById(R.id.description_header) ;
         description_header.setText(getString(R.string.description_header_notify));
 
         InputStream inputStream = getResources().openRawResource(R.raw.ring_lessons);
-        notificationArrayList = jsonReader.createListFromJson(inputStream);
+        notificationArrayList = jsonReader.createListJson(inputStream);
+
         adapter = new RingsAdapter(getActivity(), notificationArrayList);
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-
     private void setUpRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     }
-
 }

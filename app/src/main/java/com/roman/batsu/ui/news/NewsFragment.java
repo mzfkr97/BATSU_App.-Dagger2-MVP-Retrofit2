@@ -20,7 +20,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.roman.batsu.R;
 import com.roman.batsu.ui.model.News;
 import com.roman.batsu.ui.news.adapter.NewsAdapter;
-import com.roman.batsu.utils.Constants;
 import com.roman.batsu.utils.network.NetworkChecker;
 
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
     private SwipeRefreshLayout swipeContainer;
     private NewsPresenter newsPresenter;
     private NewsAdapter adapter;
+
 
 
     public static NewsFragment newInstance() {
@@ -110,7 +110,13 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
 
 
     @Override
-    public void onClickPopup(News item, View view) {
+    public void onClickPopup(News item) {
+//        ThemeHelper.applyTheme(DARK_MODE);
+//        SharedPreferences sharedPreferences =
+//                PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        String themePref = sharedPreferences.getString("themePref", ThemeHelper.DEFAULT_MODE);
+//        sharedPreferences.getString(themePref, DARK_MODE);
+//
         final String title = item.getTitle();
         final String description = item.getDescription();
 
@@ -121,7 +127,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         try {
             startActivity(Intent.createChooser(sendIntent, getString(R.string.share_popup)));
         } catch (android.content.ActivityNotFoundException ex) {
-            Log.d(Constants.TAG, "ActivityNotFoundException" + ex);
+            Log.d("TAG", "ActivityNotFoundException" + ex);
         }
     }
 

@@ -12,6 +12,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+//        SharedPreferences sharedPreferences =
+//                PreferenceManager.getDefaultSharedPreferences(this);
+//        String themePref = sharedPreferences.getString("themePref", ThemeHelper.DEFAULT_MODE);
+//        ThemeHelper.applyTheme(themePref);
+
         component = DaggerAppComponent.create();
     }
 

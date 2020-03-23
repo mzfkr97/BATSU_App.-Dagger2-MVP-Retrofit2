@@ -17,15 +17,15 @@ import java.util.List;
 
 public class JSONReader {
 
-    private List<Rings> jsonList = new ArrayList<>();
     /*
      * Read jsonFile from assets folder
      * call this:
      * inputStream = getResources().openRawResource(R.raw.file_json);
      * String jsonTaxiString = jsonReader.readJsonDataFromFile(getMyInputStream());
      */
+    private List<Rings> jsonList = new ArrayList<>();
 
-    private String readJsonDataFromFile(InputStream inputStream) throws IOException {
+    public String readJsonDataFromFile(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
         try {
             String jsonDataString;
@@ -42,22 +42,18 @@ public class JSONReader {
         return new String(builder);
     }
 
-
-    public List<Rings> createListFromJson(InputStream inputStream) {
+    public List<Rings> createListJson(InputStream inputStream) {
         try {
-            String jsonTaxiString = readJsonDataFromFile(inputStream);
+            String jsonTaxiString = this.readJsonDataFromFile(inputStream);
             JSONArray menuTaxiJsonArray = new JSONArray(jsonTaxiString);
 
             for (int i = 0; i < menuTaxiJsonArray.length(); ++i) {
-
                 JSONObject taxiItemObject = menuTaxiJsonArray.getJSONObject(i);
-                String title = taxiItemObject.getString(Constants.TITLE);
-                String first_lesson = taxiItemObject.getString(Constants.FIRST_LESSON);
-
-                Rings itemCatalog = new Rings(title, first_lesson);
+                String title = taxiItemObject.getString("title");
+                String description = taxiItemObject.getString("description");
+                Rings itemCatalog = new Rings(title, description);
                 jsonList.add(itemCatalog);
             }
-
         } catch (IOException | JSONException exception) {
             exception.printStackTrace();
         }
