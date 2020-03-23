@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.news;
+package com.roman.batsu.ui.news.news_group;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +38,6 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
     private NewsAdapter adapter;
 
 
-
     public static NewsFragment newInstance() {
         return new NewsFragment();
     }
@@ -54,8 +53,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
             progressBar.setVisibility(View.VISIBLE);
-            getNewsData();
-            netWorkCheck();
+            callToServer();
         });
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -63,17 +61,34 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         progressBar.setVisibility(View.VISIBLE);
-        netWorkCheck();
-        getNewsData();
+        callToServer();
 
         button_error.setOnClickListener(v -> {
-            progressBar.setVisibility(View.VISIBLE);
-            netWorkCheck();
-            getNewsData();
-
+            callToServer();
         });
 
         return view;
+    }
+
+    private boolean netWorkNotAvailable() {
+        return NetworkChecker.isNetworkAvailable(getActivity());
+    }
+
+
+    private void callToServer() {
+        if (netWorkNotAvailable()) {
+            getNewsData();
+        } else {
+            showError();
+
+        }
+    }
+
+    private void showError() {
+        cardNotification.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        swipeContainer.setRefreshing(false);
+        dashboardList.clear();
     }
 
     private void setUpRecyclerView(View view) {
@@ -89,16 +104,9 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         button_error = view.findViewById(R.id.button_error);
     }
 
-    private void netWorkCheck() {
-        if (getActivity() != null) {
-            if (!NetworkChecker.isNetworkAvailable(getActivity())) {
-                cardNotification.setVisibility(View.VISIBLE);
-                swipeContainer.setRefreshing(false);
-            }
-        }
-    }
 
     private void getNewsData() {
+        progressBar.setVisibility(View.VISIBLE);
         if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
             swipeContainer.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
@@ -122,7 +130,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, title + "\n" + description );
+        sendIntent.putExtra(Intent.EXTRA_TEXT, title + "\n" + description);
         sendIntent.setType("text/plain");
         try {
             startActivity(Intent.createChooser(sendIntent, getString(R.string.share_popup)));

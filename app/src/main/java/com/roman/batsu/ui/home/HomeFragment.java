@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private long mLastClickTime = 0;
     private HomePresenter movieListPresenter;
     private List<Home> moviesList;
+    private boolean noConnection;
 
     static HomeFragment newInstance(int sectionNumber) {
         HomeFragment fragment = new HomeFragment();
@@ -52,35 +53,44 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
 
         initUI(view);
+
+        progressBar.setVisibility(View.VISIBLE);
+
         //Initializing presenter
         movieListPresenter = new HomePresenter(this);
-        getNewsData(getFileName());
 
+       callToServer();
 
         swipeContainer.setOnRefreshListener(() -> {
             progressBar.setVisibility(View.VISIBLE);
-            getNewsData(getFileName());
-            netWorkCheck();
+            callToServer();
         });
-
-
-
-        progressBar.setVisibility(View.VISIBLE);
-        netWorkCheck();
 
         button_error.setOnClickListener(v -> {
-            progressBar.setVisibility(View.VISIBLE);
-            netWorkCheck();
-
-
-
+            callToServer();
         });
+
         return view;
+    }
+
+    private void callToServer() {
+        if (netWorkNotAvailable()) {
+            getNewsData(getFileName());
+        } else {
+            showError();
+
+        }
+    }
+
+    private void showError() {
+        cardNotification.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        swipeContainer.setRefreshing(false);
+        moviesList.clear();
     }
 
     private void initUI(View view) {
         moviesList = new ArrayList<>();
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -99,7 +109,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
 
-    private String getFileName(){
+    private String getFileName() {
         String fileName = null;
         try {
             assert getArguments() != null;
@@ -115,9 +125,9 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 case 2:
                     fileName = "schedule_84.json";
                     break;
-                    default:
+                default:
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("TAG", "getMyInputStream: " + e);
         }
         return fileName;
@@ -125,34 +135,25 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
 
-
-    private void netWorkCheck() {
-        if (getActivity() != null) {
-            if (!NetworkChecker.isNetworkAvailable(getActivity())) {
-                cardNotification.setVisibility(View.VISIBLE);
-                swipeContainer.setRefreshing(false);
-            }
-        }
+    private boolean netWorkNotAvailable(){
+        return NetworkChecker.isNetworkAvailable(getActivity());
     }
 
 
     private void getNewsData(String fileName) {
+        progressBar.setVisibility(View.VISIBLE);
+
         if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
             swipeContainer.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
             return;
-
         }
         movieListPresenter.requestDataFromServer(fileName);
         mLastClickTime = SystemClock.elapsedRealtime();
 
     }
 
-    private void onError(){
-        progressBar.setVisibility(View.GONE);
-        cardNotification.setVisibility(View.VISIBLE);
-        swipeContainer.setRefreshing(false);
-    }
+
 
     @Override
     public void onDestroy() {
@@ -164,7 +165,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
-        cardNotification.setVisibility(View.GONE);
     }
 
     @Override
@@ -183,7 +183,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     @Override
     public void onResponseFailure(Throwable throwable) {
-        onError();
-        Log.d("TAG", "onResponseFailure: ");
+        showError();
     }
 }

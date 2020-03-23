@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.news;
+package com.roman.batsu.ui.news.news_group;
 
 import android.util.Log;
 

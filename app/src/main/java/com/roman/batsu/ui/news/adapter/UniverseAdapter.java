@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.news.universe;
+package com.roman.batsu.ui.news.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;

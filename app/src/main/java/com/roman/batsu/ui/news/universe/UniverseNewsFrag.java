@@ -1,7 +1,5 @@
 package com.roman.batsu.ui.news.universe;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -20,16 +18,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
 import com.roman.batsu.ui.model.UniverseNews;
+import com.roman.batsu.ui.news.adapter.UniverseAdapter;
 import com.roman.batsu.utils.network.NetworkChecker;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class UniverseNewsFrag extends Fragment {
     private RecyclerView recyclerView;
@@ -41,11 +39,9 @@ public class UniverseNewsFrag extends Fragment {
     private ProgressBar progressBar;
 
     private SwipeRefreshLayout swipeContainer;
-
     public static final String URL = "http://www.bsatu.by/ru/novosti";
-    private UniverseNews universeNews;
-    private Parser parser;
-    String imageB;
+
+
 
     public static UniverseNewsFrag newInstance() {
 
@@ -60,11 +56,11 @@ public class UniverseNewsFrag extends Fragment {
         setUpRecyclerView(view);
 
 
+
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
             progressBar.setVisibility(View.VISIBLE);
-            getNewsData();
-            netWorkCheck();
+            callToServer();
         });
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -72,27 +68,19 @@ public class UniverseNewsFrag extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         progressBar.setVisibility(View.VISIBLE);
-        netWorkCheck();
-        getNewsData();
+
 
         button_error.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
-            netWorkCheck();
-            getNewsData();
+            callToServer();
 
         });
 
+        callToServer();
         return view;
     }
 
-    private void netWorkCheck() {
-        if (getActivity() != null) {
-            if (!NetworkChecker.isNetworkAvailable(getActivity())) {
-                cardNotification.setVisibility(View.VISIBLE);
-                swipeContainer.setRefreshing(false);
-            }
-        }
-    }
+
 
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
@@ -112,8 +100,56 @@ public class UniverseNewsFrag extends Fragment {
             return;
         }
         showProgress();
-        parser = new Parser();
-        parser.execute();
+        new RepositoryImpl().getArticles(URL)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<UniverseNews>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) { }
+
+                    @Override
+                    public void onNext(ArrayList<UniverseNews> articlesModels) {
+                        UniverseAdapter articlesRecyclerAdapter = new UniverseAdapter( articlesModels);
+                        recyclerView.setAdapter(articlesRecyclerAdapter);
+                        hideProgress();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+        mLastClickTime = SystemClock.elapsedRealtime();
+    }
+
+    private void callToServer() {
+        if (netWorkAvailable()) {
+            getNewsData();
+
+        } else {
+            showError();
+        }
+    }
+
+
+
+
+    private boolean netWorkAvailable() {
+        return NetworkChecker.isNetworkAvailable(getActivity());
+    }
+
+
+    private void showError() {
+        cardNotification.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        swipeContainer.setRefreshing(false);
+        dashboardList.clear();
     }
 
     private void setUpRecyclerView(View view) {
@@ -130,67 +166,4 @@ public class UniverseNewsFrag extends Fragment {
         button_error = view.findViewById(R.id.button_error);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    class Parser extends AsyncTask<Void, Void, Void> {
-
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            dashboardList.clear();
-            Document doc = null;
-            try {
-                doc = Jsoup.connect(URL)
-                        .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                        .referrer("http://www.google.com")
-                        .get();
-
-                Elements views_row = doc.select("div.views-row");
-
-
-                //Elements h2 = article.select("h2");
-                // Elements header = article.select("h2");
-                for (Element element : views_row) {
-
-                    Elements header = element.select("header");
-                    String title = header.select("span").attr("content");
-                    String description = element.select("div.field.field-name-body.field-type-text-with-summary.field-label-hidden").text();
-                    String author = element.select("div.field.field-name-field-novost-avtor.field-type-entityreference.field-label-hidden").select("a").text();
-                    String date = element.select("span.date-display-single").attr("content");
-
-
-
-                    String img = element.select("img.img-responsive").attr("abs:src");
-                    String web_link = element.select("article.node").attr("abs:about");
-
-                    universeNews = new UniverseNews(
-                            img,
-                            title,
-                            description,
-                            author,
-                            date,
-                            web_link
-                    );
-                    dashboardList.add(universeNews);
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            hideProgress();
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-    }
 }

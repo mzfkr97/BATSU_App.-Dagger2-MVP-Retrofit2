@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.google.android.material.tabs.TabLayout;
 import com.roman.batsu.R;
+import com.roman.batsu.ui.news.news_group.NewsFragment;
 import com.roman.batsu.ui.news.universe.UniverseNewsFrag;
 
 public class PagerNews extends Fragment {
