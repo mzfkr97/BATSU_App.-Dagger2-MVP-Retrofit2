@@ -28,6 +28,15 @@ import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     *
+     * @author: Zhurid Roman
+     * @version: versionName 1
+     * @Environment: Android Studio
+     * @Created: 24.03.2020
+     */
+
+
     private static final String TAB_1 = "com.roman.batsu.ACTION_HOME";
     private static final String TAB_2 = "com.roman.batsu.ACTION_DASHBOARD";
     private static final String TAB_3 = "com.roman.batsu.ACTION_NOTIFICATION";

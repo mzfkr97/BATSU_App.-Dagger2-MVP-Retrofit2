@@ -22,6 +22,7 @@ public class ToolbarDataSetter implements ToolbarDataSet {
 //    }
 
     public static final String RESPONSE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"; // "2018-10-27T06:34:39+00:00",
+
     private String capitalizeData(String string){
         //месяц с большой буквы
         return string.substring(0, 1).toUpperCase() + string.substring(1);

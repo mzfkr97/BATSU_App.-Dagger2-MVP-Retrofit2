@@ -2,6 +2,7 @@ package com.roman.batsu.ui.news.universe;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,6 @@ public class UniverseNewsFrag extends Fragment {
 
 
     public static UniverseNewsFrag newInstance() {
-
         return new UniverseNewsFrag();
     }
 
@@ -52,7 +52,10 @@ public class UniverseNewsFrag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
-        viewInit(view);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        progressBar = view.findViewById(R.id.progressBar);
+        cardNotification = view.findViewById(R.id.cardNotification);
+        button_error = view.findViewById(R.id.button_error);
         setUpRecyclerView(view);
 
 
@@ -93,51 +96,53 @@ public class UniverseNewsFrag extends Fragment {
         swipeContainer.setRefreshing(false);
     }
 
+    private void callToServer() {
+        if (netWorkAvailable()) {
+            getNewsData();
+        } else {
+            showError();
+        }
+    }
+
     private void getNewsData() {
         if (SystemClock.elapsedRealtime() - mLastClickTime < 20000) {
             swipeContainer.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
             return;
         }
-        showProgress();
+
         new RepositoryImpl().getArticles(URL)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ArrayList<UniverseNews>>() {
                     @Override
-                    public void onSubscribe(Disposable d) { }
+                    public void onSubscribe(Disposable d) {
+                        showProgress();
+                        Log.d("TAG", "onSubscribe: ");
+                    }
 
                     @Override
                     public void onNext(ArrayList<UniverseNews> articlesModels) {
-                        UniverseAdapter articlesRecyclerAdapter = new UniverseAdapter( articlesModels);
-                        recyclerView.setAdapter(articlesRecyclerAdapter);
-                        hideProgress();
+                        adapter = new UniverseAdapter( articlesModels);
+                        recyclerView.setAdapter(adapter);
+                        Log.d("TAG", "onNext: ");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
                         showError();
+                        Log.d("TAG", "onError: ");
                     }
 
                     @Override
                     public void onComplete() {
+                        hideProgress();
+                        Log.d("TAG", "onComplete: ");
                     }
                 });
 
         mLastClickTime = SystemClock.elapsedRealtime();
     }
-
-    private void callToServer() {
-        if (netWorkAvailable()) {
-            getNewsData();
-
-        } else {
-            showError();
-        }
-    }
-
-
 
 
     private boolean netWorkAvailable() {
@@ -146,6 +151,7 @@ public class UniverseNewsFrag extends Fragment {
 
 
     private void showError() {
+        Log.d("TAG", "showError: ");
         cardNotification.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         swipeContainer.setRefreshing(false);
@@ -160,10 +166,7 @@ public class UniverseNewsFrag extends Fragment {
     }
 
     private void viewInit(View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        progressBar = view.findViewById(R.id.progressBar);
-        cardNotification = view.findViewById(R.id.cardNotification);
-        button_error = view.findViewById(R.id.button_error);
+
     }
 
 }

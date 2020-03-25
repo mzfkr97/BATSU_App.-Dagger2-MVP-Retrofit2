@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.roman.batsu"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 10
-        versionName "1.0045"
+        versionCode 11
+        versionName "1.0046"
         multiDexEnabled true
 
 
