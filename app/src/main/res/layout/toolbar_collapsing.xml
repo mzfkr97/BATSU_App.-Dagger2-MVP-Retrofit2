@@ -45,7 +45,6 @@
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

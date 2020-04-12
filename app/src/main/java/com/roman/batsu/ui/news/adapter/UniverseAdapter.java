@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.model.UniverseNews;
+import com.roman.batsu.ui.model.KurjerInfo;
 import com.roman.batsu.utils.ToolbarDataSetter;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 public class UniverseAdapter extends RecyclerView.Adapter<UniverseAdapter.VievHolder> {
-    List<UniverseNews> universeNewsList;
+    List<KurjerInfo> universeNewsList;
     private int[] myDraw = {
             R.drawable.a_arrow,
             R.drawable.a_work,
@@ -32,7 +32,7 @@ public class UniverseAdapter extends RecyclerView.Adapter<UniverseAdapter.VievHo
             R.drawable.a_stock
     };
 
-    public UniverseAdapter(List<UniverseNews> universeNewsList) {
+    public UniverseAdapter(List<KurjerInfo> universeNewsList) {
         this.universeNewsList = universeNewsList;
     }
 
@@ -95,7 +95,6 @@ public class UniverseAdapter extends RecyclerView.Adapter<UniverseAdapter.VievHo
         private TextView description;
         private TextView web_link;
         private TextView data;
-
         private ImageView imageView;
 
         public VievHolder(@NonNull View itemView) {

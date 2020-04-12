@@ -2,27 +2,38 @@ package com.roman.batsu.utils.application;
 
 import android.app.Application;
 
-import com.roman.batsu.dagger.AppComponent;
-import com.roman.batsu.dagger.DaggerAppComponent;
+import com.roman.batsu.utils.LoaderFragment;
+import com.roman.batsu.utils.network.RXConnector;
 
 public class MyApplication extends Application {
 
-    private static AppComponent component;
+    private LoaderFragment loaderFragment;
+    private RXConnector rxConnector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-//        SharedPreferences sharedPreferences =
-//                PreferenceManager.getDefaultSharedPreferences(this);
-//        String themePref = sharedPreferences.getString("themePref", ThemeHelper.DEFAULT_MODE);
-//        ThemeHelper.applyTheme(themePref);
-
-        component = DaggerAppComponent.create();
+        loaderFragment = getLoaderFragment();
+        rxConnector = getRxConnector();
     }
 
-    //databaseHelper = App.getComponent().getDatabaseHelper();
-    public static AppComponent getComponent() {
-        return component;
+    public LoaderFragment getLoaderFragment(){
+        if (loaderFragment == null){
+            loaderFragment = new LoaderFragment();
+        }
+        else {
+            return loaderFragment;
+        }
+
+        return loaderFragment;
     }
+
+    public RXConnector getRxConnector() {
+        if (rxConnector == null){
+            rxConnector =  new RXConnector();
+        }
+        return rxConnector;
+    }
+
 
 }

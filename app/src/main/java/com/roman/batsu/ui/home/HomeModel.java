@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.roman.batsu.ui.model.Home;
 import com.roman.batsu.utils.api.ApiClient;
-import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.RXConnector;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public class HomeModel implements HomeContract.Model {
     // Этот класс будет реализовывать интерфейс модели из интерфейса контракта, указанного выше.
 
     private final String TAG = "MovieListModel";
+    private RXConnector rxConnector = new RXConnector();
 
     /**
      Эта функция будет извлекать данные файлов
@@ -34,7 +34,6 @@ public class HomeModel implements HomeContract.Model {
 
     @Override
     public void getMovieList(OnFinishedListener onFinishedListener, String fileName) {
-        RXConnector rxConnector = MyApplication.getComponent().getRxConnector();
         ApiClient apiService = rxConnector.getScheduleApiInterface();
         retrofit2.Call<List<Home>> call = apiService.getSchedule(fileName);
         call.enqueue(new Callback<List<Home>>() {

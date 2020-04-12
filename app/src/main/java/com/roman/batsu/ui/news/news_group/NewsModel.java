@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.roman.batsu.ui.model.News;
 import com.roman.batsu.utils.api.ApiClient;
-import com.roman.batsu.utils.application.MyApplication;
 import com.roman.batsu.utils.network.RXConnector;
 
 import java.util.List;
@@ -19,10 +18,10 @@ public class NewsModel implements NewsContract.Model {
 
     private final String TAG = "NewsModel";
     private final String JSON_FILE_NAME = "dashboard_information.json";
-
+    private RXConnector rxConnector = new RXConnector();
     @Override
     public void getMovieList(OnFinishedListener onFinishedListener) {
-        RXConnector rxConnector = MyApplication.getComponent().getRxConnector();
+
         ApiClient apiService = rxConnector.getScheduleApiInterface();
         Call<List<News>> call = apiService.getResponseDashBoard(JSON_FILE_NAME);
 

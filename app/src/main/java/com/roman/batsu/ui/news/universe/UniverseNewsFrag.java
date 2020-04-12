@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.roman.batsu.R;
-import com.roman.batsu.ui.model.UniverseNews;
+import com.roman.batsu.ui.model.KurjerInfo;
 import com.roman.batsu.ui.news.adapter.UniverseAdapter;
 import com.roman.batsu.utils.network.NetworkChecker;
 
@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class UniverseNewsFrag extends Fragment {
     private RecyclerView recyclerView;
-    private List<UniverseNews> dashboardList = new ArrayList<>();
+    private List<KurjerInfo> dashboardList = new ArrayList<>();
     private UniverseAdapter adapter;
     private long mLastClickTime = 0;
     private CardView cardNotification;
@@ -111,10 +111,10 @@ public class UniverseNewsFrag extends Fragment {
             return;
         }
 
-        new RepositoryImpl().getArticles(URL)
+        new JsoupRepository().getNewsKurjer(URL)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<UniverseNews>>() {
+                .subscribe(new Observer<ArrayList<KurjerInfo>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         showProgress();
@@ -122,7 +122,7 @@ public class UniverseNewsFrag extends Fragment {
                     }
 
                     @Override
-                    public void onNext(ArrayList<UniverseNews> articlesModels) {
+                    public void onNext(ArrayList<KurjerInfo> articlesModels) {
                         adapter = new UniverseAdapter( articlesModels);
                         recyclerView.setAdapter(adapter);
                         Log.d("TAG", "onNext: ");
@@ -165,8 +165,5 @@ public class UniverseNewsFrag extends Fragment {
         adapter = new UniverseAdapter(dashboardList);
     }
 
-    private void viewInit(View view) {
-
-    }
 
 }

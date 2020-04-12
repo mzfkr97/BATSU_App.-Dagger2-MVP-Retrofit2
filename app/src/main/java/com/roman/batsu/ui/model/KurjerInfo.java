@@ -2,7 +2,7 @@ package com.roman.batsu.ui.model;
 
 import java.io.Serializable;
 
-public class UniverseNews implements Serializable {
+public class KurjerInfo implements Serializable {
     private String image;
     private String title;
     private String description;
@@ -10,7 +10,7 @@ public class UniverseNews implements Serializable {
     private String data;
     private String web_link;
 
-    public UniverseNews(String image, String title, String description, String author, String data, String web_link) {
+    public KurjerInfo(String image, String title, String description, String author, String data, String web_link) {
         this.image = image;
         this.title = title;
         this.description = description;

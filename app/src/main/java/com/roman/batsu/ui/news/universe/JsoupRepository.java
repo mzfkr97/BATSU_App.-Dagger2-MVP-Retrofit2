@@ -1,6 +1,6 @@
 package com.roman.batsu.ui.news.universe;
 
-import com.roman.batsu.ui.model.UniverseNews;
+import com.roman.batsu.ui.model.KurjerInfo;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class RepositoryImpl implements UniverseRepository {
+public class JsoupRepository implements UniverseRepository {
 
 
     //https://dajver.blogspot.com/2017/11/rx-android.html
     @Override
-    public Observable<ArrayList<UniverseNews>> getArticles(String urlLink) {
+    public Observable<ArrayList<KurjerInfo>> getNewsKurjer(String urlLink) {
         return Observable.create(observableEmitter -> {
-            ArrayList<UniverseNews> articlesModels = new ArrayList<>();
+            ArrayList<KurjerInfo> articlesModels = new ArrayList<>();
             Document doc = null;
             try {
                 doc = Jsoup.connect(urlLink).get();
@@ -49,7 +49,7 @@ public class RepositoryImpl implements UniverseRepository {
                             .select("article.node")
                             .attr("abs:about");
 
-                    UniverseNews universeNews = new UniverseNews(
+                    KurjerInfo universeNews = new KurjerInfo(
                             img,
                             title,
                             description,
