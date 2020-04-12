@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import androidx.core.content.edit
 import androidx.databinding.DataBindingUtil
-import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.roman.batsu.R
 import com.roman.batsu.databinding.OnboardingDialogBinding
@@ -32,7 +30,7 @@ class OnBoardingDialog : BottomSheetDialogFragment(), View.OnClickListener {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.onboarding_dialog, container, false)
 
-        preferences = activity!!.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        preferences = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         binding.textTitle.text = getString(R.string.on_boarding_dialog_title)
         TextUtils.setTextWithLinks(binding.textDescription,
                 TextUtils.fromHtml(getString(R.string.on_boarding_dialog_description)))
@@ -43,10 +41,8 @@ class OnBoardingDialog : BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        val editor = preferences.edit()
-        editor.putBoolean("isFirstRun", false)
-        editor.apply()
-        dismiss()
+        preferences.edit { putBoolean("isFirstRun", false) }
+        this.dismiss()
     }
 
 

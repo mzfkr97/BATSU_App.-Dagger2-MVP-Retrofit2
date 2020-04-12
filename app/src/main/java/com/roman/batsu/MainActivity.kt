@@ -82,7 +82,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         if (noConnection) {
             toast(getString(R.string.no_internet_connection))
         }
+
         shortCutsIntents
+
         GlobalScope.launch(Dispatchers.IO) {
             doFirstRun()
         }

@@ -18,8 +18,6 @@ import java.util.*
 
 class RingsFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RingsAdapter
     private var notificationArrayList: MutableList<Rings> = ArrayList()
     private val jsonReader = JSONReader()
     private lateinit var notificationsBinding: FragmentNotificationsBinding
@@ -31,11 +29,7 @@ class RingsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        notificationsBinding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_notifications,
-                container,
-                false)
+        notificationsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false)
 
         notificationsBinding.recyclerView.apply {
             setHasFixedSize(true)
@@ -45,14 +39,10 @@ class RingsFragment : Fragment() {
             val inputStream = resources.openRawResource(R.raw.ring_lessons)
             notificationArrayList = jsonReader.createListJson(inputStream)
 
-            adapter = RingsAdapter(activity, notificationArrayList)
+            adapter = RingsAdapter(context, notificationArrayList)
             notificationsBinding.recyclerView.adapter = adapter
-
         }
-
-
         return notificationsBinding.root
-
     }
 
 
