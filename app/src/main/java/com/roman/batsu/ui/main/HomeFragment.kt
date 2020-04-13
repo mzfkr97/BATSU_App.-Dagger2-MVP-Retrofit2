@@ -55,7 +55,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         homeFragBindingUtil.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = HomeAdapter(activity, moviesList)
+            adapter = HomeAdapter(context, moviesList)
 
         }
 
@@ -109,7 +109,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             return fileName
         }
 
-    private fun netWorkNotAvailable(): Boolean = NetworkChecker.isNetworkAvailable(activity)
+    private fun netWorkNotAvailable(): Boolean = NetworkChecker.isNetworkAvailable(context)
 
     private fun getNewsData(fileName: String?) {
         homeFragBindingUtil.progressBar.visibility =VISIBLE

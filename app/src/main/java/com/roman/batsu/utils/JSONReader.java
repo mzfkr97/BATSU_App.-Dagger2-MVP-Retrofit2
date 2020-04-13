@@ -25,7 +25,7 @@ public class JSONReader {
      */
     private List<Rings> jsonList = new ArrayList<>();
 
-    public String readJsonDataFromFile(InputStream inputStream) throws IOException {
+    private String readJsonDataFromFile(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
         try {
             String jsonDataString;

@@ -26,18 +26,19 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/lottie"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:lottie_autoPlay="true"
-                    app:lottie_loop="false"
-                    app:lottie_rawRes="@raw/dashboard_analytics_two"
-                    tools:layout_editor_absoluteY="32dp" />
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/dashboard_analytics_two" />
 
                 <TextView
                     android:id="@+id/text_description"
@@ -47,28 +48,24 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/lottie"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lottie"
+                    app:layout_constraintStart_toEndOf="@+id/lottie"
+                    app:layout_constraintTop_toTopOf="@+id/lottie"
                     tools:text="1 Пара 16-00" />
 
-                <Button
-                    android:id="@+id/letsGoButton"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Продолжить"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_description"
-                    app:layout_constraintVertical_bias="1.0" />
+<!--                <Button-->
+<!--                    android:id="@+id/buttonAlarm"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text="Установить напоминание"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
