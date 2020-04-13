@@ -44,11 +44,17 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_swipe_refresh, container, false);
+        View view = inflater.inflate(R.layout.recycler_universe, container, false);
         newsPresenter = new NewsPresenter(this);
 
-        viewInit(view);
-        setUpRecyclerView(view);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        progressBar = view.findViewById(R.id.progressBar);
+        cardNotification = view.findViewById(R.id.cardNotification);
+        button_error = view.findViewById(R.id.buttonError);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
@@ -91,18 +97,6 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
         dashboardList.clear();
     }
 
-    private void setUpRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
-
-    private void viewInit(View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        progressBar = view.findViewById(R.id.progressBar);
-        cardNotification = view.findViewById(R.id.cardNotification);
-        button_error = view.findViewById(R.id.button_error);
-    }
 
 
     private void getNewsData() {
@@ -119,12 +113,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.DashboardItemC
 
     @Override
     public void onClickPopup(News item) {
-//        ThemeHelper.applyTheme(DARK_MODE);
-//        SharedPreferences sharedPreferences =
-//                PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        String themePref = sharedPreferences.getString("themePref", ThemeHelper.DEFAULT_MODE);
-//        sharedPreferences.getString(themePref, DARK_MODE);
-//
+
         final String title = item.getTitle();
         final String description = item.getDescription();
 

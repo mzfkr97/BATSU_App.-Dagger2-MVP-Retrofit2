@@ -29,7 +29,12 @@ class RingsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        notificationsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false)
+        notificationsBinding =
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.fragment_notifications,
+                        container,
+                        false)
 
         notificationsBinding.recyclerView.apply {
             setHasFixedSize(true)

@@ -17,12 +17,13 @@ import retrofit2.Response;
 public class NewsModel implements NewsContract.Model {
 
     private final String TAG = "NewsModel";
-    private final String JSON_FILE_NAME = "dashboard_information.json";
     private RXConnector rxConnector = new RXConnector();
+
     @Override
     public void getMovieList(OnFinishedListener onFinishedListener) {
 
         ApiClient apiService = rxConnector.getScheduleApiInterface();
+        String JSON_FILE_NAME = "dashboard_information.json";
         Call<List<News>> call = apiService.getResponseDashBoard(JSON_FILE_NAME);
 
 

@@ -10,10 +10,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.roman.batsu.ui.dialogfragment.OnBoardingDialog
-import com.roman.batsu.ui.home.ViewPagerHome
+import com.roman.batsu.ui.main.ViewPagerHome
 import com.roman.batsu.ui.news.PagerNews
 import com.roman.batsu.ui.rings.RingsFragment
-import com.roman.batsu.utils.BottomNavigationViewHelper
 import com.roman.batsu.utils.LoaderFragment
 import com.roman.batsu.utils.ToolbarDataSet
 import com.roman.batsu.utils.ToolbarDataSetter
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         if (savedInstanceState == null) {
             toolbar_title.text = toolbarTitle[0]
         }
-        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView)
+
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         if (noConnection) {
             toast(getString(R.string.no_internet_connection))

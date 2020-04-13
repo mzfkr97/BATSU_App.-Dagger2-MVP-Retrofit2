@@ -16,7 +16,7 @@ public class NewsPresenter implements NewsContract.Presenter, NewsContract.Model
     private NewsContract.View fragmentView;
     private NewsContract.Model newsListModel;
 
-    public NewsPresenter(NewsContract.View fragmentView) {
+    NewsPresenter(NewsContract.View fragmentView) {
         this.fragmentView = fragmentView;
         this.newsListModel = new NewsModel();
     }

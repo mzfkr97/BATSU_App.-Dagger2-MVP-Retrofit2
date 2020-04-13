@@ -1,4 +1,4 @@
-package com.roman.batsu.ui.home.adapter;
+package com.roman.batsu.ui.main.adapter;
 
 import android.content.Context;
 import android.util.Log;
