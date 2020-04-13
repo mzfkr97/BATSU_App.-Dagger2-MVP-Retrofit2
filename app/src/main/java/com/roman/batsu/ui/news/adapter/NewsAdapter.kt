@@ -17,15 +17,6 @@ class NewsAdapter(
         private val dashboardList: List<News>
 ) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
-
-    fun setAutoOnItemClickListener(popupItemClick: DashboardItemClick?) {
-        onClickPopup = popupItemClick
-    }
-
-    interface DashboardItemClick {
-        fun onClickPopup(item: News?)
-    }
-
     companion object {
         private var onClickPopup: DashboardItemClick? = null
 
@@ -33,7 +24,6 @@ class NewsAdapter(
             val rnd = Random().nextInt(size)
             return this[rnd]
         }
-
 
         private val myDraw = intArrayOf(
                 R.drawable.a_arrow,
@@ -47,6 +37,16 @@ class NewsAdapter(
         )
     }
 
+    fun setAutoOnItemClickListener(popupItemClick: DashboardItemClick?) {
+        onClickPopup = popupItemClick
+    }
+
+    interface DashboardItemClick {
+        fun onClickPopup(item: News?)
+    }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dashboard, parent, false)
@@ -56,7 +56,7 @@ class NewsAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie: News = dashboardList[position]
-        val imageUrl = dashboardList[position].image_url
+        val imageUrl = dashboardList[position].imageUrl
         setImageFromPicasso(holder, imageUrl)
         holder.bind(movie)
     }
@@ -96,19 +96,16 @@ class NewsAdapter(
         var imageView: ImageView = itemView.findViewById(R.id.imageView)
 
         init {
-
             textShare.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            if (onClickPopup != null) {
-                onClickPopup!!.onClickPopup(dashboardList[adapterPosition])
-            }
+                onClickPopup?.onClickPopup(dashboardList[adapterPosition])
         }
 
         fun bind(taxiItem: News) {
 
-            val web = taxiItem.web_link
+            val web = taxiItem.webLink
             val colorHex = taxiItem.hex
             title.text = taxiItem.title
             title.setTextColor(colorHex.myColor())
@@ -118,7 +115,7 @@ class NewsAdapter(
                     webLink.visibility = View.GONE
                 }
             }
-            webLink.text = taxiItem.web_link
+            webLink.text = taxiItem.webLink
             time.text = taxiItem.time
         }
 

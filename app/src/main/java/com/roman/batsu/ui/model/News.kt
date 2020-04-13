@@ -7,10 +7,10 @@ class News(title: String?, description: String?) : Rings(title, description) {
     val time: String? = null
 
     @SerializedName("image_url")
-    val image_url: String? = null
+    val imageUrl: String? = null
 
     @SerializedName("web_link")
-    val web_link: String? = null
+    val webLink: String? = null
 
     @SerializedName("hex")
     val hex = 0
