@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun doFirstRun() {
         val settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        if (settings.getBoolean("isFirstRun", true)) {
+        if (settings.getBoolean("isFirstRuns", true)) {
             val onBoardingDialog = OnBoardingDialog.newInstance()
             onBoardingDialog.isCancelable = false
             onBoardingDialog.show(supportFragmentManager, "onBoardingDialogFragment")

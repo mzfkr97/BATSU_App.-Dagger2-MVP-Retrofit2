@@ -41,7 +41,7 @@ class OnBoardingDialog : BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        preferences.edit { putBoolean("isFirstRun", false) }
+        preferences.edit { putBoolean("isFirstRuns", false) }
         this.dismiss()
     }
 
