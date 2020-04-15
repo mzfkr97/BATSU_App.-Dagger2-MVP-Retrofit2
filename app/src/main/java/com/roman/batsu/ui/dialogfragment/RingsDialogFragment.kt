@@ -1,37 +1,39 @@
 package com.roman.batsu.ui.dialogfragment
 
 import android.annotation.SuppressLint
-import android.content.ClipDescription
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.provider.AlarmClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.roman.batsu.R
 import com.roman.batsu.databinding.DialogRingsBinding
-import com.roman.batsu.utils.TextUtils
 
-class RingsDialogFragment : BottomSheetDialogFragment() , View.OnClickListener{
+class RingsDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogRingsBinding
     val ringArgsText: String = "ringArgsText"
     val ringArgsDesc: String = "ringArgsDesc"
+    val lottieFileName: String = "lottieFileName"
+
     private var ringsText: String? = null
     private var ringsDescription: String? = null
 
+
     companion object {
         @JvmStatic
-        fun newInstance(ringsText: String, ringsDescription: String) =
+        fun newInstance(ringsText: String,
+                        ringsDescription: String,
+                        lottieFile: Int) =
                 RingsDialogFragment().apply {
                     arguments = Bundle().apply {
                         putString(ringArgsText, ringsText)
                         putString(ringArgsDesc, ringsDescription)
+                        putInt(lottieFileName, lottieFile)
+                        Log.d("TAG", "RingsDialogFragment $ringsText $ringsDescription   $lottieFile ")
+
                     }
                 }
     }
@@ -45,17 +47,30 @@ class RingsDialogFragment : BottomSheetDialogFragment() , View.OnClickListener{
         arguments?.getString(ringArgsText)?.let { ringsText = it }
         arguments?.getString(ringArgsDesc)?.let { ringsDescription = it }
 
-        binding.textDescription.text = ringsText + "\n" + ringsDescription
-        binding.lottie.playAnimation()
+        binding.textDescription.text = "$ringsText\n$ringsDescription"
 
-//        binding.buttonAlarm.setOnClickListener(this)
+        val lottieName: Int? = arguments?.getInt(lottieFileName, 0)
+        val lottieAnimation: Int = getLottieAnimationFile(lottieName)
+        binding.lottie.setAnimation(lottieAnimation)
+        binding.lottie.playAnimation()
 
         return binding.root
     }
 
-    override fun onClick(v: View?) {
-//        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-//        context?.startActivity(intent)
+
+    /*
+    * Возвращает название анимации лотти из RAW ресурсов
+    * */
+    private fun getLottieAnimationFile(lottieName: Int?): Int {
+        return when (lottieName) {
+            1 -> {
+                R.raw.lottie_dashboard_analytics_two
+            }
+            else -> {
+                R.raw.lottie_pizza
+            }
+        }
     }
+
 }
 

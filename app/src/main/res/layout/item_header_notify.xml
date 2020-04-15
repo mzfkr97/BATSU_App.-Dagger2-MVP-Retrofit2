@@ -7,6 +7,12 @@
 
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFooter"
+        style="@style/myCardViewStyle"
+        android:layout_margin="@dimen/card_view_layout_margin"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_view_corner_radius">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,5 +37,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
 

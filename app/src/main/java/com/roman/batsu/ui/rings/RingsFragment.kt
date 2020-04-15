@@ -1,6 +1,7 @@
 package com.roman.batsu.ui.rings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.roman.batsu.ui.dialogfragment.RingsDialogFragment
 import com.roman.batsu.ui.model.Rings
 import com.roman.batsu.utils.JSONReader
 import java.util.*
+import kotlin.math.log
 
 class RingsFragment : Fragment(), RingsAdapter.RingsItemClick {
 
@@ -48,18 +50,35 @@ class RingsFragment : Fragment(), RingsAdapter.RingsItemClick {
         }
 
         adapter.setAutoOnItemClickListener(this)
+        notificationsBinding.itemFooter.cardFooter.setOnClickListener(){
+            showDialog("", getString(R.string.description_header_notify), 2)
+
+        }
 
         return notificationsBinding.root
     }
 
     override fun onClick(item: Rings?) {
-        var title: String? = item?.title
-        var description: String? = item?.description
+        val title: String? = item?.title
+        val description: String? = item?.description
+        showDialog(title.toString(),description.toString(), 1)
 
-        val onBoardingDialog = RingsDialogFragment.newInstance(item?.title.toString(), item?.description.toString())
+
+    }
+
+    private fun showDialog(ringsText: String, ringsDescription: String, lottieFileName: Int){
+
+        val onBoardingDialog =
+                RingsDialogFragment.newInstance(
+                        ringsText,
+                        ringsDescription,
+                        lottieFileName
+        )
+
         onBoardingDialog.isCancelable = true
         activity?.supportFragmentManager?.let {
-            onBoardingDialog.show(it, "onBoardingDialogFragment") }
+            onBoardingDialog.show(it, "onBoardingDialogFragment")
+        }
 
     }
 
