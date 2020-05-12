@@ -1,184 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardNotification"
-    style="@style/myCardViewStyle"
-    android:layout_margin="@dimen/card_view_layout_margin"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/card_view_corner_radius">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemHome"
+            type="com.roman.batsu.ui.model.Home" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardNotification"
+        style="@style/myCardViewStyle"
+        android:layout_margin="@dimen/card_view_layout_margin"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_view_corner_radius">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/textDrop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:alpha="0.7"
-            android:fontFamily="@font/font_awesome"
-            android:text="@string/fa_comma_dot"
-            android:textColor="?attr/colorAccent"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title" />
+            <TextView
+                android:id="@+id/textDrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:alpha="0.7"
+                android:fontFamily="@font/font_awesome"
+                android:text="@string/fa_comma_dot"
+                android:textColor="?attr/colorAccent"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/textDrop"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Понедельник" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/textDrop"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Понедельник" />
 
-        <TextView
-            android:id="@+id/dateText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="right"
-            android:textColor="@color/textColorPrimary"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/title"
-            tools:ignore="RtlHardcoded"
-            tools:text="19 Февраля" />
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="right"
+                android:textColor="@color/textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                tools:ignore="RtlHardcoded"
+                tools:text="19 Февраля" />
 
-        <View
-            android:id="@+id/border"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:alpha=".5"
-            android:background="@color/browser_actions_title_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+            <View
+                android:id="@+id/border"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                android:alpha=".5"
+                android:background="@color/browser_actions_title_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
-        <TextView
-            android:id="@+id/countFirstLesson"
-            style="@style/textSecondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="1"
+            <TextView
+                android:id="@+id/countFirstLesson"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="1"
 
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textFirstLess"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/border" />
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textFirstLess"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/border" />
 
-        <TextView
-            android:id="@+id/textFirstLess"
-            style="@style/textPrimary"
+            <TextView
+                android:id="@+id/textFirstLess"
+                style="@style/textPrimary"
 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateText"
-            tools:text="Микроэкономика\n08:15 - 09:00\n09:05 - 09:50" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateText"
+                tools:text="Микроэкономика\n08:15 - 09:00\n09:05 - 09:50" />
 
-        <TextView
-            android:id="@+id/countSecondLesson"
-            style="@style/textSecondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="2"
-            android:textSize="24sp"
+            <TextView
+                android:id="@+id/countSecondLesson"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="2"
+                android:textSize="24sp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/textSecondLesson"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textSecondLesson" />
+                app:layout_constraintBottom_toBottomOf="@+id/textSecondLesson"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textSecondLesson" />
 
-        <TextView
-            android:id="@+id/textSecondLesson"
-            style="@style/textPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            <TextView
+                android:id="@+id/textSecondLesson"
+                style="@style/textPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
 
-            android:gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textFirstLess"
-            tools:text="Математика\nИванов И И" />
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textFirstLess"
+                tools:text="Математика\nИванов И И" />
 
-        <TextView
-            android:id="@+id/countThreeLesson"
-            style="@style/textSecondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="3"
+            <TextView
+                android:id="@+id/countThreeLesson"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="3"
 
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textThreeLesson"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textThreeLesson" />
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textThreeLesson"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textThreeLesson" />
 
-        <TextView
-            android:id="@+id/textThreeLesson"
-            style="@style/textPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            <TextView
+                android:id="@+id/textThreeLesson"
+                style="@style/textPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
 
-            android:gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textSecondLesson"
-            tools:text="Математика\nИванов И И" />
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textSecondLesson"
+                tools:text="Математика\nИванов И И" />
 
-        <TextView
-            android:id="@+id/countFourLesson"
-            style="@style/textSecondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="24sp"
+            <TextView
+                android:id="@+id/countFourLesson"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/textFourLesson"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textFourLesson"
-            tools:text="4" />
+                app:layout_constraintBottom_toBottomOf="@+id/textFourLesson"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textFourLesson"
+                tools:text="4" />
 
-        <TextView
-            android:id="@+id/textFourLesson"
-            style="@style/textPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            <TextView
+                android:id="@+id/textFourLesson"
+                style="@style/textPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
 
-            android:layout_marginBottom="8dp"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textThreeLesson"
-            tools:text="Математика\nИванов И И" />
+                android:layout_marginBottom="8dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textThreeLesson"
+                tools:text="Математика\nИванов И И" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

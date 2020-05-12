@@ -24,6 +24,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var movieListPresenter: HomePresenter
     private var moviesList: MutableList<Home> = ArrayList()
     lateinit var homeFragBindingUtil: RecyclerSwipeRefreshBinding
+    private var adapter = HomeAdapter()
+    private val fileNameFactory = FileNameFactory()
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"
@@ -55,8 +57,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         homeFragBindingUtil.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = HomeAdapter(context, moviesList)
-
+            homeFragBindingUtil.recyclerView.adapter = adapter
         }
 
         homeFragBindingUtil.swipeContainer.setColorSchemeResources(
@@ -76,7 +77,8 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     private fun callToServer() {
         if (netWorkNotAvailable()) {
-            getNewsData(fileName)
+            val filenamePosition = arguments?.getInt(ARG_SECTION_NUMBER)
+            getNewsData(fileNameFactory.fileName(filenamePosition))
         } else {
             showError()
         }
@@ -95,8 +97,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             var fileName: String? = null
             try {
                 assert(arguments != null)
-                val arg = arguments?.getInt(ARG_SECTION_NUMBER)
-                when (arg) {
+                when (arguments?.getInt(ARG_SECTION_NUMBER)) {
                     0 -> fileName = "schedule_82.json"
                     1 -> fileName = "schedule_83.json"
                     2 -> fileName = "schedule_84.json"
@@ -137,11 +138,9 @@ class HomeFragment : Fragment(), HomeContract.View {
         homeFragBindingUtil.swipeContainer.isRefreshing = false
     }
 
-    override fun setDataToRecyclerView(movieArrayList: List<Home>) {
-        moviesList.apply {
-            clear()
-            addAll(movieArrayList)
-        }
+    override fun setDataToRecyclerView(movieArrayList: MutableList<Home>) {
+        homeFragBindingUtil.recyclerView.adapter = adapter
+        adapter.submitList(movieArrayList)
     }
 
     override fun onResponseFailure(throwable: Throwable) {

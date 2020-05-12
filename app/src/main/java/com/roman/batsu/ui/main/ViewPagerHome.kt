@@ -16,13 +16,11 @@ class ViewPagerHome : Fragment() {
     private lateinit var binding: ViewPagerBinding
 
     companion object {
-        fun newInstance(): ViewPagerHome {
-            return ViewPagerHome()
-        }
+        fun newInstance(): ViewPagerHome = ViewPagerHome()
 
-        private const val NUM_OF_TABS = 3
     }
 
+    private val numOfTabs = 3
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,21 +30,13 @@ class ViewPagerHome : Fragment() {
                         R.layout.view_pager, container, false)
         val mAdapter = ViewPager(childFragmentManager)
         binding.pager.adapter = mAdapter
-        binding.pager.offscreenPageLimit = 3
+        binding.pager.offscreenPageLimit = numOfTabs
         binding.tabs.setupWithViewPager(binding.pager)
         return binding.root
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        val mAdapter = ViewPager(childFragmentManager)
-//        binding.pager.adapter = mAdapter
-//        binding.pager.offscreenPageLimit = 3
-//        binding.tabs.setupWithViewPager(binding.pager)
-//    }
-
     internal inner class ViewPager(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
-        private val mNumOfTabs: Int = NUM_OF_TABS
+        private val mNumOfTabs: Int = numOfTabs
 
         override fun getItem(position: Int): Fragment = newInstance(position)
 

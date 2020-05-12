@@ -24,21 +24,6 @@
                 android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/text_title"
-                    style="@style/textPrimary"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center"
-                    android:textAllCaps="true"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/on_boarding_dialog_title" />
-
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/lottie"
                     android:layout_width="0dp"
@@ -49,7 +34,7 @@
                     android:cropToPadding="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_title"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="false"
                     app:lottie_rawRes="@raw/lottie_wel" />

@@ -11,7 +11,7 @@ interface ApiClient {
      * { http://mir-dverei.by/image/schedule_82.json }
      */
     @GET("image/{fileName}")
-    fun getSchedule(@Path("fileName") fileName: String?): Call<List<Home>>
+    fun getSchedule(@Path("fileName") fileName: String?): Call<MutableList<Home>>
 
     /*
      * { http://mir-dverei.by/image/dashboard_information.json }

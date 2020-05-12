@@ -32,8 +32,6 @@ class RingsDialogFragment : BottomSheetDialogFragment() {
                         putString(ringArgsText, ringsText)
                         putString(ringArgsDesc, ringsDescription)
                         putInt(lottieFileName, lottieFile)
-                        Log.d("TAG", "RingsDialogFragment $ringsText $ringsDescription   $lottieFile ")
-
                     }
                 }
     }
@@ -63,11 +61,9 @@ class RingsDialogFragment : BottomSheetDialogFragment() {
     * */
     private fun getLottieAnimationFile(lottieName: Int?): Int {
         return when (lottieName) {
-            1 -> {
-                R.raw.lottie_dashboard_analytics_two
+            1 -> { R.raw.lottie_dashboard_analytics_two
             }
-            else -> {
-                R.raw.lottie_pizza
+            else -> { R.raw.lottie_pizza
             }
         }
     }

@@ -7,7 +7,7 @@ interface HomeContract {
     interface View {
         fun showProgress()
         fun hideProgress()
-        fun setDataToRecyclerView(movieArrayList: List<Home>)
+        fun setDataToRecyclerView(movieArrayList: MutableList<Home>)
         fun onResponseFailure(throwable: Throwable)
     }
 
@@ -19,7 +19,7 @@ interface HomeContract {
 
     interface Model {
         interface OnFinishedListener {
-            fun onFinished(homeList: List<Home>)
+            fun onFinished(homeList: MutableList<Home>)
             fun onFailure(t: Throwable)
         }
 

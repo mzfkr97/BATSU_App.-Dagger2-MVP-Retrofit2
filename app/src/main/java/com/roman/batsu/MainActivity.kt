@@ -142,9 +142,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private val shortCutsIntents: Unit
         get() {
-            val action = intent.action
-            if (action != null) {
-                when (action) {
+            intent.action.let {
+                when (intent.action) {
                     TAB_1 -> {
                         toolbar_title.text = toolbarTitle[0]
                         setShortCutsFragment(active, fragment1)

@@ -9,6 +9,7 @@ import com.roman.batsu.R
 
 @SuppressLint("Registered")
 class BaseActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)

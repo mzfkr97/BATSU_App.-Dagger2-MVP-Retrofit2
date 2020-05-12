@@ -29,9 +29,8 @@ class OnBoardingDialog : BottomSheetDialogFragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.dialog_onboarding, container, false)
-
         preferences = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
-        binding.textTitle.text = getString(R.string.on_boarding_dialog_title)
+
         TextUtils.setTextWithLinks(binding.textDescription,
                 TextUtils.fromHtml(getString(R.string.on_boarding_dialog_description)))
         binding.lottie.playAnimation()
@@ -41,9 +40,9 @@ class OnBoardingDialog : BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        preferences.edit { putBoolean("isFirstRuns", false) }
+        preferences.edit {
+            putBoolean("isFirstRuns", false)
+        }
         this.dismiss()
     }
-
-
 }

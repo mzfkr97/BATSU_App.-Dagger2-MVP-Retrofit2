@@ -11,6 +11,7 @@ class HomePresenter internal constructor(
     //Компоненты MVP приложения
 
     private val movieListModel: HomeContract.Model
+
     /**
      * Подаем ему вью и модель
      */
@@ -19,30 +20,32 @@ class HomePresenter internal constructor(
     init {
         movieListModel = HomeModel()
     }
+
     override fun onDestroy() {
         fragmentView = null
     }
 
     override fun requestDataFromServer(filename: String) {
-        if (fragmentView != null) {
-            fragmentView!!.showProgress()
+        fragmentView.let {
+            it?.showProgress()
         }
         movieListModel.getMovieList(this, filename)
     }
 
-    override fun onFinished(homeList: List<Home>) {
+    override fun onFinished(homeList: MutableList<Home>) {
         fragmentView?.setDataToRecyclerView(homeList)
-        if (fragmentView != null) {
-            fragmentView!!.hideProgress()
+        fragmentView.let {
+            it?.hideProgress()
+
         }
     }
 
 
-
     override fun onFailure(t: Throwable) {
-        fragmentView!!.onResponseFailure(t)
-        if (fragmentView != null) {
-            fragmentView!!.hideProgress()
+        fragmentView?.onResponseFailure(t)
+        fragmentView.let {
+            it?.hideProgress()
+
         }
     }
 

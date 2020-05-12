@@ -26,13 +26,13 @@ class HomeModel : HomeContract.Model {
     override fun getMovieList(onFinishedListener: HomeContract.Model.OnFinishedListener, fileName: String) {
         val apiService = rxConnector.scheduleApiInterface
         val call = apiService.getSchedule(fileName)
-        call.enqueue(object : Callback<List<Home>> {
-            override fun onResponse(call: Call<List<Home>>, response: Response<List<Home>>) {
+        call.enqueue(object : Callback<MutableList<Home>> {
+            override fun onResponse(call: Call<MutableList<Home>>, response: Response<MutableList<Home>>) {
                 val jsonArray = response.body()
                 jsonArray?.let { onFinishedListener.onFinished(it) }
             }
 
-            override fun onFailure(call: Call<List<Home>>, throwable: Throwable) {
+            override fun onFailure(call: Call<MutableList<Home>>, throwable: Throwable) {
                 Log.e(TAG, throwable.toString())
                 onFinishedListener.onFailure(throwable)
             }
