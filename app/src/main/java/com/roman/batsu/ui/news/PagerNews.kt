@@ -13,13 +13,7 @@ import com.roman.batsu.R
 import com.roman.batsu.ui.news.news_group.NewsFragment
 import com.roman.batsu.ui.news.universe.UniverseNewsFrag
 
-class PagerNews : Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.view_pager, container, false)
-    }
-
+class PagerNews : Fragment(R.layout.view_pager) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
