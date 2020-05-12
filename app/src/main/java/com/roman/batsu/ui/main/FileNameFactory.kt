@@ -4,7 +4,6 @@ import android.util.Log
 
 class FileNameFactory {
 
-
     fun fileName(intName: Int?): String? {
         var fileNameOutput: String? = null
         try {

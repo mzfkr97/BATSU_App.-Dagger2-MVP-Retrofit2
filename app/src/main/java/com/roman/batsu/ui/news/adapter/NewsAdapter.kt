@@ -85,7 +85,7 @@ class NewsAdapter(
         }
     }
 
-    override fun getItemCount(): Int = dashboardList.size
+    override fun getItemCount(): Int = dashboardList.count()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var title: TextView = itemView.findViewById(R.id.title)

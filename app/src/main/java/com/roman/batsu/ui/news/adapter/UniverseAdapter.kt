@@ -77,7 +77,7 @@ class UniverseAdapter(
         }
     }
 
-    override fun getItemCount(): Int = universeNewsList.size
+    override fun getItemCount(): Int = universeNewsList.count()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
