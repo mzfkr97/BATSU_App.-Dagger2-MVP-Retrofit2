@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="itemHome"
             type="com.roman.batsu.ui.model.Home" />
@@ -36,7 +37,8 @@
                 android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title" />
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:setBackgroundColor="@{itemHome}" />
 
             <TextView
                 android:id="@+id/title"
@@ -45,6 +47,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_regular"
+                android:text="@{itemHome.day}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textDrop"
@@ -59,6 +62,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="right"
+                android:text="@{itemHome.date}"
                 android:textColor="@color/textColorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/title"
@@ -82,25 +86,26 @@
 
             <TextView
                 android:id="@+id/countFirstLesson"
+
                 style="@style/textSecondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="1"
-
+                android:text="@{itemHome.lessons.get(0).count}"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textFirstLess"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/border" />
+                app:layout_constraintTop_toBottomOf="@+id/border"
+                tools:text="1" />
 
             <TextView
                 android:id="@+id/textFirstLess"
                 style="@style/textPrimary"
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center_horizontal"
+                android:text="@{itemHome.lessons.get(0).lessonName}"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,9 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="2"
+                tools:text="2"
+                android:text="@{itemHome.lessons.get(1).count}"
                 android:textSize="24sp"
-
                 app:layout_constraintBottom_toBottomOf="@+id/textSecondLesson"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textSecondLesson" />
@@ -126,7 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
+                android:text="@{itemHome.lessons.get(1).lessonName}"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +144,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="3"
+                tools:text="3"
+                android:text="@{itemHome.lessons.get(2).count}"
 
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textThreeLesson"
@@ -152,7 +158,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
+                android:text="@{itemHome.lessons.get(2).lessonName}"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -167,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:textSize="24sp"
-
+                android:text="@{itemHome.lessons.get(3).count}"
                 app:layout_constraintBottom_toBottomOf="@+id/textFourLesson"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textFourLesson"
@@ -179,7 +185,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
+                android:text="@{itemHome.lessons.get(3).lessonName}"
                 android:layout_marginBottom="8dp"
                 android:gravity="center_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"

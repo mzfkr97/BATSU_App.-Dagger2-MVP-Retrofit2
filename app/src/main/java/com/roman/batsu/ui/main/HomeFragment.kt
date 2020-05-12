@@ -45,7 +45,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                 DataBindingUtil.inflate(
                         inflater,
                         R.layout.recycler_swipe_refresh, container, false)
-        //Initializing presenter
+        // presenter
         movieListPresenter = HomePresenter(this)
 
         homeFragBindingUtil.apply {
@@ -90,25 +90,6 @@ class HomeFragment : Fragment(), HomeContract.View {
         homeFragBindingUtil.swipeContainer.isRefreshing = false
         moviesList.clear()
     }
-
-
-    private val fileName: String?
-        get() {
-            var fileName: String? = null
-            try {
-                assert(arguments != null)
-                when (arguments?.getInt(ARG_SECTION_NUMBER)) {
-                    0 -> fileName = "schedule_82.json"
-                    1 -> fileName = "schedule_83.json"
-                    2 -> fileName = "schedule_84.json"
-                    else -> {
-                    }
-                }
-            } catch (e: Exception) {
-                Log.d("TAG", "getMyInputStream: $e")
-            }
-            return fileName
-        }
 
     private fun netWorkNotAvailable(): Boolean = NetworkChecker.isNetworkAvailable(context)
 
