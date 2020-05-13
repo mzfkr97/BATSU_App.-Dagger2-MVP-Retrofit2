@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#477BB8</color>
-    <color name="colorPrimaryDark">#407ABD</color>
+    <color name="colorPrimary">#18B193</color>
+    <color name="colorPrimaryDark">#16a085</color>
     <color name="colorAccent">#FAE102</color>
 
     <color name="colorError">#FFFF0000</color>
-    <color name="colorTabIndicator">#FFF176</color>
+    <color name="colorTabIndicator">#ffff00</color>
 
     <color name="colorBackground">#EBEFF5</color>
     <color name="colorCardBackground">#FFFFFF</color>
@@ -17,11 +17,11 @@
     <!--цвет текста primary и secondary в меню-->
     <color name="textColorPrimary">#333333</color>
     <color name="textColorSecondary">#8A8989</color>
-    <color name="textColorLink">#5781bf</color>
+    <color name="textColorLink">#16a085</color>
 
 
 
-    <color name="tab_background_selected">#5281b9</color>
+    <color name="tab_background_selected">#16a085</color>
     <color name="tab_background_unselected">#8B8A8A</color>
 
 
