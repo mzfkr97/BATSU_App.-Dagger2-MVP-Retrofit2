@@ -17,7 +17,6 @@ class ViewPagerHome : Fragment() {
 
     companion object {
         fun newInstance(): ViewPagerHome = ViewPagerHome()
-
     }
 
     private val numOfTabs = 3
